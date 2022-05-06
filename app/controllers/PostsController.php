@@ -1,6 +1,6 @@
 <?php 
 
-class PostController extends Controller{
+class PostsController extends Controller{
     public function index(){
         $post = new posts;
         if (isset($_REQUEST['page'])) {

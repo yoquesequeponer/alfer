@@ -5,28 +5,18 @@ $form = new FormHelper;
 <table>
 <tr>
     <td>Name</td>
-    <td><?= $form->input('text', ['name'=>'name']) ?></td>
+    <td><?= $form->input('text', ['name'=>'titulo']) ?></td>
 </tr>
 
 <tr>
     <td>Price</td>
-    <td><?= $form->input('number', ['name'=>'price']) ?></td>
+    <td><?= $form->input('number', ['name'=>'contenido']) ?></td>
 </tr>
 
 <tr>
     <td>Author</td>
-    <td><?= $form->input('text', ['name'=>'authors']) ?></td>
+    <td><?= $form->input('text', ['name'=>'fechacreacion']) ?></td>
 </tr>
-<tr>
-    <td>isbn</td>
-    <td><?= $form->input('number', ['name'=>'isbn']) ?></td>
-</tr>
-
-<tr>
-    <td>Publisher</td>
-    <td><?= $form->input('text', ['name'=>'publisher']) ?></td>
-</tr>
-
 <tr>
     <td>file</td>
     <td><?= $form->input('file', ['name'=>'cover']) ?></td>

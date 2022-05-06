@@ -5,7 +5,7 @@ use Symfony\Component\Console\Helper\Table;
 ob_start(); ?>
 
 <div class="container">
-  <a href="<?= ROOT_PATH ?>books/add" class="btn btn-success">Añadir Libro</a>
+  <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Libro</a>
 
   <div class="row content" data-aos="fade-up">
     <div class="table-responsive">
@@ -25,23 +25,20 @@ ob_start(); ?>
             
           </tr>
         </thead>
-        <?php foreach ($data['books'] as $table) : ?>
+        <?php foreach ($data['posts'] as $table) : ?>
           <tbody>
             <tr>
               <th scope="row"><img src="data:img/jpg;base64,<?php echo base64_encode($table->files->filedata); ?>" alt="" width="100px"></img></th>
-              <td><?php echo $table->id ?></td>
-              <td><?php echo $table->name ?></td>
-              <td><?php echo $table->authors ?></td>
-              <td><?php echo $table->price ?></td>
-              <td><?php echo $table->isbn ?></td>
-              <td><?php echo $table->publisher ?></td>
-              <td><?php echo $table->published_date ?></td>
-              <td><?php echo $table->updated_at ?></td>
-              <td><?php echo $table->created_at ?></td>
+              <td><?php echo $table->idPost ?></td>
+              <td><?php echo $table->titulo ?></td>
+              <td><?php echo $table->contenido ?></td>
+              <td><?php echo $table->foto ?></td><!-- falta meter la categoria, solo puedo meter el id de la categoria
+                                                    otra opcion es listar las categorias y los ids y que se guarden los ids
+              <td><?php echo $table->fechacreacion ?></td>
             </tr>
             <tr>
-              <td><a href="<?= ROOT_PATH ?>books/delete/<?= $table['id'] ?>" class="btn btn-danger">Borrar</a></td>
-              <td><a href="<?= ROOT_PATH ?>books/read/<?= $table['id'] ?>" class="btn btn-info">ver mas</a></td>
+              <td><a href="<?= ROOT_PATH ?>posts/delete/<?= $table['id'] ?>" class="btn btn-danger">Borrar</a></td>
+              <td><a href="<?= ROOT_PATH ?>posts/read/<?= $table['id'] ?>" class="btn btn-info">ver mas</a></td>
             </tr>
           </tbody>
                 

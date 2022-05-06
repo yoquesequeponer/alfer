@@ -1,52 +1,77 @@
 <?php 
 $form = new FormHelper;
 ?>
-  <link href="<?=ROOT_PATH?>public/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/aos/aos.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="<?=ROOT_PATH?>public/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<div class="container">
 
-  <!-- Template Main CSS File -->
-  <link href="<?=ROOT_PATH?>public/css/style.css" rel="stylesheet">
+<ol class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li class="active">Registration</li>
+</ol>
 
-  <?php $messages = new Messages;?>
-
-     
-     <?php echo $messages->display() ?>
+<div class="row">
     
-    
- 
-  
+    <!-- Article main content -->
+    <article class="col-xs-12 maincontent">
+        <header class="page-header">
+            <h1 class="page-title">Registration</h1>
+        </header>
+        
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="thin text-center">Register a new account</h3>
+                    <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signin.html">Login</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+                    <hr>
 
-<div style="margin-left: 25%;">
-<form enctype="multipart/form-data" action="<?php echo ROOT_PATH."users/register";?>" method="post">
-<table>
-<tr >
-    <td>Name</td>
-    <td><?= $form->input('text', ['name'=>'name']) ?></td>
-</tr>
+                    <form>
+                        <div class="top-margin">
+                            <label>First Name</label>
+                            <?= $form->input('text', ['name'=>'name']) ?>
+                        </div>
+                        <div class="top-margin">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="top-margin">
+                            <label>Email Address <span class="text-danger">*</span></label>
+                            <?= $form->input('text', ['name'=>'email']) ?>
+                        </div>
 
-<tr>
-    <td>email</td>
-    <td><?= $form->input('text', ['name'=>'email']) ?></td>
-</tr>
+                        <div class="row top-margin">
+                            <div class="col-sm-6">
+                                <label>Password <span class="text-danger">*</span></label>
+                                <?= $form->input('password', ['name'=>'password']) ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Confirm Password <span class="text-danger">*</span></label>
+                                <?= $form->input('password', ['name'=>'password']) ?>
+                            </div>
+                        </div>
 
-<tr>
-    <td>pwd</td>
-    <td><?= $form->input('password', ['name'=>'password']) ?></td>
-</tr>
+                        <hr>
 
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <label class="checkbox">
+                                    <input type="checkbox"> 
+                                    I've read the <a href="page_terms.html">Terms and Conditions</a>
+                                </label>                        
+                            </div>
+                            <div class="col-lg-4 text-right">
+                                <button class="btn btn-action" type="submit">Register</button>
+                                <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-
-</table>
-<?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
-
-</form>
+        </div>
+        
+    </article>
+    <!-- /Article -->
 
 </div>
+</div>	<!-- /container -->
 
 
