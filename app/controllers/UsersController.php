@@ -1,6 +1,7 @@
 <?php 
 class UsersController extends Controller{
     public function register(){
+        // Controlar que las dos contraseñas son iguales
         $user= new User;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -10,7 +11,7 @@ class UsersController extends Controller{
             $user->loadData($post);
             if($user->validate()){
                 $user->save();
-                header('location:'. ROOT_PATH);
+                header('Location:' . ROOT_PATH);
             }
         }else{
             Messages::setMsg('Incorrect Register', 'error');
@@ -21,19 +22,21 @@ class UsersController extends Controller{
     public function login(){
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $user= new User;
             $post['password']= md5($post['password']);
-            $user=$user->where('email','=',$post['email'])->first();
+            $user=$user->where('correo','=',$post['correo'])->first();
 
             
             if ($user['password']==$post['password']){
+                
                 $_SESSION['is_logged_in'] = true;
                 $_SESSION['user_data'] = array(
                 "id" =>$user->id,
-                "name"=> $user->name,
-                "email" =>$user->email,);
+                "name"=> $user->userName,
+                "correo" =>$user->correo,);
                 header('Location:' . ROOT_PATH);
             }else{
                 Messages::setMsg('Incorrect Login', 'error');

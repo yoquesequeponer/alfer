@@ -11,12 +11,12 @@
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/font-awesome.min.css">
 
 	<!-- Custom styles for our template -->
-	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/bootstrap-theme.css" media="screen" >
+	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/main.css">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -32,11 +32,11 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.html"><img src="<?php echo ROOT_PATH?>public/assets/images/logo.png" alt="Progressus HTML5 template"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="<?=ROOT_PATH?>">Home</a></li>
 					<li><a href="about.html">About</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
@@ -46,7 +46,15 @@
 						</ul>
 					</li>
 					<li><a href="contact.html">Contact</a></li>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+					<?php if(isset($_SESSION['is_logged_in'])) : ?>
+						<li class="active"><a href="<?=ROOT_PATH?>" style="pointer-events: none">Welcome <?php echo $_SESSION['user_data']['name']; ?></a></li>
+						<li><a class="btn" href="<?=ROOT_PATH?>users/logout">logout</a></li>
+					<?php else : ?>
+					<li><a class="btn" href="<?=ROOT_PATH?>users/login">SIGN IN</a></li>
+					<li><a class="btn" href="<?=ROOT_PATH?>users/register">SIGN UP</a></li>
+					<?php endif; ?>
+
+
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -54,7 +62,7 @@
 	<!-- /.navbar -->
 
 	<!-- Header -->
-	<header id="head">
+<!--	<header id="head">
 		<div class="container">
 			<div class="row">
 				<h1 class="lead">AWESOME, CUSTOMIZABLE, FREE</h1>
@@ -62,10 +70,10 @@
 				<p><a class="btn btn-default btn-lg" role="button">MORE INFO</a> <a class="btn btn-action btn-lg" role="button">DOWNLOAD NOW</a></p>
 			</div>
 		</div>
-	</header>
+	</header>-->
 	<!-- /Header -->
 
-<?php $messages = new Messages; echo $messages->display() ?>
+<?php $messages = new Messages; echo $messages->display() ?><!-- muestra los mensajes de error-->
 <?=$content?>
 
 	<!-- Social links. @TODO: replace by link/instructions in template -->
@@ -134,11 +142,10 @@
 					<div class="col-md-6 widget">
 						<div class="widget-body">
 							<p class="simplenav">
-								<a href="#">Home</a> | 
-								<a href="about.html">About</a> |
-								<a href="sidebar-right.html">Sidebar</a> |
-								<a href="contact.html">Contact</a> |
-								<b><a href="signup.html">Sign up</a></b>
+								<a href="">Home</a> | 
+								<a href="<?=ROOT_PATH?>posts/index">Posts</a> | 
+								<b><a href="<?=ROOT_PATH?>users/login">Sign in</a></b>
+								<b><a href="<?=ROOT_PATH?>users/register">Sign up</a></b>
 							</p>
 						</div>
 					</div>
@@ -164,8 +171,8 @@
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="assets/js/headroom.min.js"></script>
-	<script src="assets/js/jQuery.headroom.min.js"></script>
-	<script src="assets/js/template.js"></script>
+	<script src="<?php echo ROOT_PATH?>public/assets/js/headroom.min.js"></script>
+	<script src="<?php echo ROOT_PATH?>public/assets/js/jQuery.headroom.min.js"></script>
+	<script src="<?php echo ROOT_PATH?>public/assets/js/template.js"></script>
 </body>
 </html>

@@ -1,32 +1,55 @@
 <?php ob_start();
 $form = new FormHelper;
 ?>
-<form enctype="multipart/form-data" action="<?php echo ROOT_PATH."books/add";?>" method="post">
-<table>
-<tr>
-    <td>Name</td>
-    <td><?= $form->input('text', ['name'=>'titulo']) ?></td>
-</tr>
+	<div class="container">
 
-<tr>
-    <td>Price</td>
-    <td><?= $form->input('number', ['name'=>'contenido']) ?></td>
-</tr>
+<div class="row">
+    
+    <!-- Article main content -->
+    <article class="col-xs-12 maincontent">
+        <header class="page-header">
+            <h1 class="page-title">Registration</h1>
+        </header>
+        
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="thin text-center">Register a new account</h3>
+                    <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signin.html">Login</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
+                    <hr>
 
-<tr>
-    <td>Author</td>
-    <td><?= $form->input('text', ['name'=>'fechacreacion']) ?></td>
-</tr>
-<tr>
-    <td>file</td>
-    <td><?= $form->input('file', ['name'=>'cover']) ?></td>
-</tr>
+                    <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."posts/add";?>" method="POST">
+                        <div class="top-margin">
+                            <label>Titulo</label>
+                            <?= $form->input('text', ['name'=>'titulo']) ?>
+                        </div>
+                        <div class="top-margin">
+                            <label>Contenido</label>
+                            <?= $form->input('text', ['name'=>'contenido']) ?>
+                        </div>
+                        <div class="top-margin">
+                            <label>Foto</label>
+                            <?= $form->input('text', ['name'=>'apellido']) ?>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-4 text-right">
+                                <!-- <button class="btn btn-action" type="submit">Register</button> -->
+                                <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
+        </div>
+        
+    </article>
+    <!-- /Article -->
 
-</table>
-<?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
-
-</form>
-
+</div>
+</div>	<!-- /container -->
 <?php $content = ob_get_clean()?>
 <?php include 'app/views/layout.html.php'?>
+
+

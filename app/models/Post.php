@@ -1,7 +1,7 @@
 <?php 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Posts extends Model{
+class Post extends Model{
 
     public function rules(): array{
         return $rules = array(
@@ -12,15 +12,18 @@ class Posts extends Model{
         }
         
     public function tableName(): string {
-        return 'Posts';
+        return 'posts';
     }
     
     public function attributes(): array {
         return ['titulo','contenido','authors'];
     }
     
-    public function files(){
-        return $this->hasOne('Files');
+   //public function files(){
+   //    return $this->hasOne('Files');
+   //}
+    public function coments(){
+        return $this->hasMany('Coments');
     }
 }
 ?>

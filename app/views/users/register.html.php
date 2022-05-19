@@ -1,12 +1,7 @@
-<?php 
+<?php ob_start();
 $form = new FormHelper;
 ?>
 	<div class="container">
-
-<ol class="breadcrumb">
-    <li><a href="index.html">Home</a></li>
-    <li class="active">Registration</li>
-</ol>
 
 <div class="row">
     
@@ -23,18 +18,22 @@ $form = new FormHelper;
                     <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signin.html">Login</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
                     <hr>
 
-                    <form>
+                    <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."users/register";?>" method="POST">
                         <div class="top-margin">
-                            <label>First Name</label>
-                            <?= $form->input('text', ['name'=>'name']) ?>
+                            <label>User Name</label>
+                            <?= $form->input('text', ['name'=>'userName']) ?>
                         </div>
                         <div class="top-margin">
-                            <label>Last Name</label>
-                            <input type="text" class="form-control">
+                            <label>Nombre</label>
+                            <?= $form->input('text', ['name'=>'nombre']) ?>
                         </div>
                         <div class="top-margin">
-                            <label>Email Address <span class="text-danger">*</span></label>
-                            <?= $form->input('text', ['name'=>'email']) ?>
+                            <label>Apellido</label>
+                            <?= $form->input('text', ['name'=>'apellido']) ?>
+                        </div>
+                        <div class="top-margin">
+                            <label>Correo<span class="text-danger">*</span></label>
+                            <?= $form->input('text', ['name'=>'correo']) ?>
                         </div>
 
                         <div class="row top-margin">
@@ -42,10 +41,17 @@ $form = new FormHelper;
                                 <label>Password <span class="text-danger">*</span></label>
                                 <?= $form->input('password', ['name'=>'password']) ?>
                             </div>
-                            <div class="col-sm-6">
+
+
+
+                            <!-- Controlar que antes del login ambas contraseñas sean identicas -->
+
+
+
+                            <!-- <div class="col-sm-6">
                                 <label>Confirm Password <span class="text-danger">*</span></label>
-                                <?= $form->input('password', ['name'=>'password']) ?>
-                            </div>
+                                < ?= // $form->input('password', ['name'=>'password']) ?>
+                            </div> -->
                         </div>
 
                         <hr>
@@ -58,7 +64,7 @@ $form = new FormHelper;
                                 </label>                        
                             </div>
                             <div class="col-lg-4 text-right">
-                                <button class="btn btn-action" type="submit">Register</button>
+                                <!-- <button class="btn btn-action" type="submit">Register</button> -->
                                 <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
                             </div>
                         </div>
@@ -73,5 +79,7 @@ $form = new FormHelper;
 
 </div>
 </div>	<!-- /container -->
+<?php $content = ob_get_clean()?>
+<?php include 'app/views/layout.html.php'?>
 
 

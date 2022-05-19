@@ -3,6 +3,14 @@
 use Symfony\Component\Console\Helper\Table;
 
 ob_start(); ?>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div class="container">
   <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Libro</a>
@@ -13,15 +21,11 @@ ob_start(); ?>
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Authors</th>
-            <th scope="col">Price</th>
-            <th scope="col">ISBN</th>
-            <th scope="col">Publisher</th>
-            <th scope="col">Published Date</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Updated at</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Contenido</th>
+            <th scope="col">foto</th>
+
+            <th scope="col">fecha creacion</th>
             
           </tr>
         </thead>
@@ -29,11 +33,10 @@ ob_start(); ?>
           <tbody>
             <tr>
               <th scope="row"><img src="data:img/jpg;base64,<?php echo base64_encode($table->files->filedata); ?>" alt="" width="100px"></img></th>
-              <td><?php echo $table->idPost ?></td>
               <td><?php echo $table->titulo ?></td>
-              <td><?php echo $table->contenido ?></td>
-              <td><?php echo $table->foto ?></td><!-- falta meter la categoria, solo puedo meter el id de la categoria
-                                                    otra opcion es listar las categorias y los ids y que se guarden los ids
+              <td><?php echo $table->Contenido ?></td>
+              <td><?php echo $table->foto ?></td><!--falta meter la categoria, solo puedo meter el id de la categoria
+                                                    otra opcion es listar las categorias y los ids y que se guarden los ids-->
               <td><?php echo $table->fechacreacion ?></td>
             </tr>
             <tr>
@@ -44,7 +47,6 @@ ob_start(); ?>
                 
         <?php endforeach; ?>
       </table>
-
     </div>
   </div>
 </div>
