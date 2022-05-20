@@ -15,39 +15,45 @@ ob_start(); ?>
 <div class="container">
   <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Libro</a>
 
-  <div class="row content" data-aos="fade-up">
-    <div class="table-responsive">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Contenido</th>
-            <th scope="col">foto</th>
-
-            <th scope="col">fecha creacion</th>
-            
-          </tr>
-        </thead>
+  <?php $numero = 0?>
+      <div class="row">
         <?php foreach ($data['posts'] as $table) : ?>
-          <tbody>
-            <tr>
-              <th scope="row"><img src="data:img/jpg;base64,<?php echo base64_encode($table->files->filedata); ?>" alt="" width="100px"></img></th>
-              <td><?php echo $table->titulo ?></td>
-              <td><?php echo $table->Contenido ?></td>
-              <td><?php echo $table->foto ?></td><!--falta meter la categoria, solo puedo meter el id de la categoria
-                                                    otra opcion es listar las categorias y los ids y que se guarden los ids-->
-              <td><?php echo $table->fechacreacion ?></td>
-            </tr>
-            <tr>
-              <td><a href="<?= ROOT_PATH ?>posts/delete/<?= $table['id'] ?>" class="btn btn-danger">Borrar</a></td>
-              <td><a href="<?= ROOT_PATH ?>posts/read/<?= $table['id'] ?>" class="btn btn-info">ver mas</a></td>
-            </tr>
-          </tbody>
-                
+          <?php if ($numero == 4) {
+            break;
+          }?>
+          <div class="col-md-3 col-sm-6 highlight">
+					  <div class="h-caption"><h4><img src="<?php echo ROOT_PATH?>public/assets/images/spiderman.jpg"></h4></div>
+					  <div class="h-body text-center">
+					  	<p><?php echo $table->contenido ?></p>
+					  </div>
+          </div>
+          <?php $numero = $numero + 1?>                
         <?php endforeach; ?>
-      </table>
-    </div>
+      </div>
+
+
+<div class="container">
+	<div class="row">
+
+    <?php foreach ($data['posts'] as $table) : ?>
+      <div class="col-8">
+
+			<div class="row">
+
+				<div  class="col-md-4">
+					<img src="<?php echo ROOT_PATH?>public/assets/images/minitaconmartillo.jpg">
+				</div>
+
+				<div class="col-2">
+        <p><?php echo $table->contenido ?></p>
+
+				</div>
+
+			</div>
+      </div>
+    <?php endforeach; ?>
+
+
   </div>
 </div>
 

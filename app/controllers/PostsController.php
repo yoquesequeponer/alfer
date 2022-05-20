@@ -8,7 +8,7 @@ class PostsController extends Controller{
             $page = "1";
         }
         //$posts=$post->all();
-        $perpage= 2;
+        $perpage= 4;
         $numRows=$post->count();
         $numPages=ceil($numRows/$perpage);
         $offset = ($page-1)*$perpage;
