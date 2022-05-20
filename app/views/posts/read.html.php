@@ -1,6 +1,5 @@
 <?php ob_start();?>
 
-
 	<!-- container -->
 	<div class="container">
 
@@ -46,6 +45,34 @@
 		</div>
 	</div>	<!-- /container -->
 	<a href="<?= ROOT_PATH ?>coments/add/<?php echo $data['post']->id?>" class="btn btn-success">Añadir comentario</a>
+	<div class="posts-wrapper">
+   	<div class="post">
+      <div class="post-info">
+	    <!-- if user likes post, style button differently -->
+      	<i 
+		  <?php if (userLiked($data['post']->id)): ?>
+      		  class="fa fa-thumbs-up like-btn"
+      	  <?php else: ?>
+      		  class="fa fa-thumbs-o-up like-btn"
+      	  <?php endif ?>
+      	  data-id="<?php echo $data['post']->id ?>"></i>
+      	<span class="likes"><?php echo getLikes($data['post']->id); ?></span>
+      	
+      	
+
+	    <!-- if user dislikes post, style button differently -->
+      	<i 
+      	  <?php if (userDisliked($data['post']->id)): ?>
+      		  class="fa fa-thumbs-down dislike-btn"
+      	  <?php else: ?>
+      		  class="fa fa-thumbs-o-down dislike-btn"
+      	  <?php endif ?>
+      	  data-id="<?php echo $data['post']->id ?>"></i>
+      	<span class="dislikes"><?php echo getDislikes($data['post']->id); ?></span>
+      </div>
+   	</div>
+  </div>
+  <script src="<?php echo ROOT_PATH?>public/assets/js/scripts.js"></script>
 
 
     <div class="column">

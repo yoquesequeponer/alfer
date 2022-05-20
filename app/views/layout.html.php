@@ -13,7 +13,8 @@
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/font-awesome.min.css">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Custom styles for our template -->
 	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/bootstrap-theme.css" media="screen" >
 	<link rel="stylesheet" href="<?php echo ROOT_PATH?>public/assets/css/main.css">
