@@ -9,7 +9,7 @@ class Post extends Model{
     public function rules(): array{
         return $rules = array(
         'titulo'=>[self::RULE_REQUIRED],
-        'contenido'=>[self::RULE_REQUIRED,[self::RULE_MIN, 'min'=>0],[self::RULE_MAX,'max'=>2000]],
+        'contenido'=>[self::RULE_REQUIRED],
         'authors'=>[self::RULE_REQUIRED],
 );
         }
@@ -26,7 +26,7 @@ class Post extends Model{
    //    return $this->hasOne('Files');
    //}
     public function coments(){
-        return $this->hasMany('Coments');
+        return $this->hasMany(Coment::class);
     }
 }
 ?>

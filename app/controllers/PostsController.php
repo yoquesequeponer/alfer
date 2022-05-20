@@ -17,11 +17,18 @@ class PostsController extends Controller{
         $this->view('index.html',['posts'=>$posts,'numpages'=>$numPages,'page'=>$page]);
     }
     public function read($id){
-      
-        $model = new posts;
-        $posts = $model->find($id);
-       
-        $this->view('read.html',['posts'=>$posts]);
+        //$posts = Post::with('coments')->where('id',$id)->get();
+        //die($posts);
+        $posts = Post::where('id',$id)->find(1);
+        
+
+        $coments = Coment::with('user')->where('post_id', $id)->get() ;
+        //$user = User::all();
+        //die($coments);
+        //print_r($posts);
+        //die($posts);
+        $this->view('read.html',['post'=>$posts, 'coments'=>$coments]); 
+    
     }
 
     public function delete($id){
@@ -66,14 +73,5 @@ class PostsController extends Controller{
    //}
 }
 
-public function show($id){
-
-    $posts = Posts::where('idPost',$id)->get();
-    print_r($posts);
-
-    $comments = $posts->coments()->get();
-    
-
-}
 }
 ?>

@@ -4,8 +4,7 @@ class User extends Model{
 
 
 protected $fillable = ['userName', 'correo', 'password','nombre'];
-protected $guarded = ['id','confirmpassword'];
-protected $appends = ['confirmpassword'];
+protected $guarded = ['id'];
 
 public function rules(): array{
     return $rules = array(
@@ -22,6 +21,9 @@ public function tableName(): string{
 
 public function attributes(): array{
     return ['userName','nombre', 'correo', 'password', 'nombreUsuario', 'apellido', 'rol' ];
+}
+public function coments(){
+    return $this->hasMany(Coment::class);
 }
 
 }
