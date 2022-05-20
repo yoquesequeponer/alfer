@@ -47,34 +47,16 @@ class PostsController extends Controller{
             $post->loadData($sanitize);
             
                 if ($post->validate()) {
-                    
+                    $post->categoria_id = $_POST['select'];                    
                     $post->save();
-                    //if(!is_uploaded_file($_FILES['cover']['tmp_name'])){
-                    //    $error = 'There was no file uploaded';
-                    //Messages::setMsg($error,'error');
-                    //    $this->view('add.html');
-                    //    return;
-                    //}
-                    //$uploadfile = $_FILES['cover']['tmp_name'];
-                    //$uploaddata['filedata'] = file_get_contents($uploadfile);
-                    //$uploaddata['filename'] = $_FILES['cover']['tmp_name'];
-                    //$uploaddata['mimetype'] = $_FILES['cover']['tmp_name'];
-                    //$file = new Files;
-                    //$file->loadData($uploaddata);
-                    //    if($file->validate()){
-                    //        $post->files()->save($file);
-                    //    }else{
-                    //        $error = 'There was an error while uploading the file';
-                    //    }
-                    //header('location:'. ROOT_PATH);
-                    //}
                     header('location:'. ROOT_PATH);
                 }
                 
         } else {
+            $categorias = Categorias::all();
             $model= new Post;
             $posts = $model->all();
-            $this->view('add.html');
+            $this->view('add.html',['categorias'=>$categorias]);
         }
    //}else{
    //    header('location:'. ROOT_PATH);

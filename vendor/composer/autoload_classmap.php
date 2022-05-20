@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App' => $baseDir . '/app/core/App.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'Categorias' => $baseDir . '/app/core/Categorias.php',
     'Coment' => $baseDir . '/app/models/Coment.php',
     'ComentsController' => $baseDir . '/app/controllers/ComentsController.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',

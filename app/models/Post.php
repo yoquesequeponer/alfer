@@ -3,6 +3,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Post extends Model{
 
+    protected $fillable = ['categoria_id'];
+    protected $guarded = ['categoria_id'];
+    
     public function rules(): array{
         return $rules = array(
         'titulo'=>[self::RULE_REQUIRED],

@@ -31,6 +31,14 @@ $form = new FormHelper;
                             <label>Foto</label>
                             <?= $form->input('text', ['name'=>'apellido']) ?>
                         </div>
+                        <div class="top-margin">
+                            <label>Categoria</label>
+                            <Select name="select">
+                            <?php foreach ($data['categorias'] as $categoria) : ?>
+                                <option  value="<?php echo($categoria->id)?>"><?php echo($categoria->descripcion)?></option>
+                            <?php endforeach?>
+                            </Select>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="col-lg-4 text-right">

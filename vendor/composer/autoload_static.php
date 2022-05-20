@@ -149,6 +149,7 @@ class ComposerStaticInitec291baab1bcf71b83406ef5d9873dec
     public static $classMap = array (
         'App' => __DIR__ . '/../..' . '/app/core/App.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Categorias' => __DIR__ . '/../..' . '/app/core/Categorias.php',
         'Coment' => __DIR__ . '/../..' . '/app/models/Coment.php',
         'ComentsController' => __DIR__ . '/../..' . '/app/controllers/ComentsController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
