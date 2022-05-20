@@ -5,7 +5,12 @@ class Coment extends Model{
 
     public function rules(): array{
         return $rules = array(
-        'content'=>[self::RULE_REQUIRED]);
+        'content'=>[self::RULE_REQUIRED],
+        'user_id'=>[self::RULE_REQUIRED]
+    
+    
+    
+    );
     }
         
     public function tableName(): string {

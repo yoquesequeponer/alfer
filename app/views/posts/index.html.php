@@ -25,6 +25,7 @@ ob_start(); ?>
 					  <div class="h-caption"><h4><img src="<?php echo ROOT_PATH?>public/assets/images/spiderman.jpg"></h4></div>
 					  <div class="h-body text-center">
 					  	<p><?php echo $table->contenido ?></p>
+              <a href="<?php echo ROOT_PATH ."posts/read/". $table->id?>">Enlace</a>
 					  </div>
           </div>
           <?php $numero = $numero + 1?>                

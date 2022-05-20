@@ -13,8 +13,8 @@ $form = new FormHelper;
         
         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
             <div class="panel panel-default">
-                <div class="panel-body">                    
-                    <form>
+                <div class="panel-body">   
+                <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."coments/add/".array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]?>" method="POST">
                         <div class="top-margin">
                             <label>Contenido <span class="text-danger"></span></label>
                             <?= $form->input('text', ['name'=>'contenido']) ?>

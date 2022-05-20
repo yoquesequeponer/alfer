@@ -13,22 +13,26 @@ class ComentsController extends Controller {
     }
 
     public function add($id){
-        //die("hola");
+        //die($id);
+
        // if (isset($_SESSION['is_logged_in'])) {       
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $coment=new Coment;
-                $coment->post_id = $id;  
-                $coment->usuario_id ->  $_SESSION['user_data']['id'];
-
-                $coment->loadData($post);
+                $coment->post_id = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];  
+                $coment->user_id =  $_SESSION['user_data']['id'];
                 
-                    if ($coment->validate()) {  
+                $coment->loadData($post);
+                //die(print_r($post));
+                
+                    if ($coment->validate()) { 
+                        $coment->contenido = $_POST['contenido'];
                         $coment->save();
                         header('location:'. ROOT_PATH);
                         }
        
            } else {
+              
                $model= new Coment;
                $coment = $model->all();
                $this->view('add.html');

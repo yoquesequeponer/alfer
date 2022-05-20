@@ -10,7 +10,6 @@ class Post extends Model{
         return $rules = array(
         'titulo'=>[self::RULE_REQUIRED],
         'contenido'=>[self::RULE_REQUIRED],
-        'authors'=>[self::RULE_REQUIRED],
 );
         }
         

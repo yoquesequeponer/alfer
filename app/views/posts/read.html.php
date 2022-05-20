@@ -45,6 +45,8 @@
 
 		</div>
 	</div>	<!-- /container -->
+	<a href="<?= ROOT_PATH ?>coments/add/<?php echo $data['post']->id?>" class="btn btn-success">Añadir comentario</a>
+
 
     <div class="column">
     <div class="row">
