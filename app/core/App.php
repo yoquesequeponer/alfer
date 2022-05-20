@@ -14,7 +14,7 @@ class App
         if (file_exists('app/controllers/' . $url[0] . 'Controller.php')) {
             $name = $url[0];
             $this->controller = $url[0] . 'Controller';
-            //die($name.'xxx'.$this->controller); --> PostsxxxPostsController
+            //die($name.'xxx'.$this->controller); //--> PostsxxxPostsController
             $this->controller = new $this->controller($name);
             unset($url[0]);
         }
@@ -30,7 +30,7 @@ class App
             $this->params = $_POST;
         }
 
-        // die($this->controller." XX ". $this->method. " XX ".array_values($this->params)); ->> Posts XX index XX Array
+         //die($this->controller." XX ". $this->method. " XX ".array_values($this->params)); //->> Posts XX index XX Array
         call_user_func_array([$this->controller, $this->method], array_values($this->params));
     }
     public function parseUrl()

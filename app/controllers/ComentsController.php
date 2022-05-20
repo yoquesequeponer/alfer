@@ -12,10 +12,7 @@ class ComentsController extends Controller {
 
     }
 
-    public function add($id){
-        //die($id);
-
-       // if (isset($_SESSION['is_logged_in'])) {       
+    public function add(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $coment=new Coment;
