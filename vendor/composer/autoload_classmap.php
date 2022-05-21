@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'App' => $baseDir . '/app/core/App.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Categorias' => $baseDir . '/app/core/Categorias.php',
