@@ -59,9 +59,11 @@ class PostsController extends Controller{
             $post=new Post;
             
             $post->loadData($sanitize);
+            die($post);
             
                 if ($post->validate()) {
-                    $post->categoria_id = $_POST['select'];                    
+                    $post->categoria_id = $_POST['select']; 
+                    $post-> $_SESSION['user_data']['id'];           
                     $post->save();
                     header('location:'. ROOT_PATH);
                 }

@@ -15,7 +15,7 @@ class AdminController extends UsersController{
             $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $idUsuario = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
             $users = new User;
-            $user = $users->where('id', $idUsuario)->update(['rol'=>$id]);
+            $user = $users->where('id', $idUsuario)->update(['rol'=>$_POST['select']]);
             header('location:'. ROOT_PATH."admin/admin/");
         }else{
             $users = new User;
@@ -44,6 +44,11 @@ class AdminController extends UsersController{
            $this->view('categoria.html');
        }    
 
+    }
+
+    public function mod($id){
+        $user = new User;
+        $user->edit($id);
     }
 
 }

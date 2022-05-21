@@ -56,6 +56,36 @@ class UsersController extends Controller{
 		session_destroy();
         header('Location:' . ROOT_PATH);
     }
+
+    public function edit($id){
+        if($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]){
+                header('Location:' . ROOT_PATH.$id);
+        }
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            
+                $idUsuario = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+                $user = User::where('id', $idUsuario)->find($idUsuario);
+                $username = $_POST['username'];
+                $nombre = $_POST['nombre'];
+                $apellido = $_POST['apellido'];
+                $correo =$_POST['correo'];
+                if($user->password != md5($_POST['password'])){
+                    $password = $_POST['password'];
+                }else{
+                    $password = md5( $_POST['password']);
+                }
+
+                $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
+                header('location:'. ROOT_PATH."admin/admin/");
+            }else{
+                var_dump($id);
+                $users = new User;
+                $user = $users->where('id', $id)->find($id);
+                //die($user);
+                $this->view('edit.html',['user'=>$user]);
+            }
+    }
 }
 
 ?>

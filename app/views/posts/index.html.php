@@ -13,7 +13,9 @@ ob_start(); $form = new FormHelper;?>
 <br>
 
 <div class="container">
-  <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Libro</a>
+  <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Post</a>
+  <a href="<?= ROOT_PATH ?>admin/admin" class="btn btn-success">admin</a>
+  <a href="<?= ROOT_PATH ?>users/edit/17" class="btn btn-success">edit 17</a>
 
 <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."posts/index";?>" method="POST">
 <?php foreach ($data['categorias'] as $categoria) : ?>
