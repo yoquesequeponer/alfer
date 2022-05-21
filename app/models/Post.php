@@ -3,8 +3,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Post extends Model{
 
-    protected $fillable = ['categoria_id'];
-    protected $guarded = ['categoria_id'];
+    protected $fillable = [''];
+    protected $guarded = [''];
     
     public function rules(): array{
         return $rules = array(

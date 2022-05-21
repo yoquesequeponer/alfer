@@ -2,7 +2,7 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Coment extends Model{
-
+    protected $guarded = [];
     public function rules(): array{
         return $rules = array(
         'content'=>[self::RULE_REQUIRED],

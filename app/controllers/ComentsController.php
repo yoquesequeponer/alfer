@@ -58,9 +58,20 @@ class ComentsController extends Controller {
     }
 
     public function edit($id){
-        $coment = new Coment;
-        $coment = $coment->get($id);
-        return $coment;
-    }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            
+            $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+            $coment = Coment::where('id', $idPost)->find($idPost);
+            $contenido = $_POST['contenido'];
+            $coment->update(['contenido'=> $contenido]);
+            header('location:'. ROOT_PATH."admin/admin/");
+        }else{
+            $coments = new Coment;
+            $coment = $coments->where('id', $id)->find($id);
+            $this->view('edit.html',['coment'=>$coment]);
+        }
+}
+
 }
 ?>

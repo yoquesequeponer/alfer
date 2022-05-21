@@ -504,6 +504,84 @@
 <!-- fin Posts -->
 
 
+<!-- inicio coment -->
+                        <div class="row flex-grow">
+                          <div class="col-12 grid-margin stretch-card">
+                            <div class="card card-rounded">
+                              <div class="card-body">
+                                <div class="d-sm-flex justify-content-between align-items-start">
+                                  <div>
+                                    <h4 class="card-title card-title-dash">Comentarios</h4>
+                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
+                                  </div>
+                                </div>
+                                <div class="table-responsive  mt-1">
+                                  <table class="table select-table">
+                                    <thead>
+                                      <tr>
+                                        <th>
+                                          <div class="form-check form-check-flat mt-0">
+                                            <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
+                                          </div>
+                                        </th>
+                                        <th>ID Comentario</th>
+                                        <th>ID Post</th>
+                                        <th>ID Usuario</th>
+                                        <th>Contenido</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php foreach ($data['coments'] as $coment) : ?>
+                                        <tr>
+                                          <td>
+                                            <div class="form-check form-check-flat mt-0">
+                                              <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex ">
+                                              <div>
+                                                <p><?php echo $coment->id?></p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <h6><?php echo $coment->post_id?></h6>
+                                          </td>
+                                          <td>
+                                            <h6><?php echo $coment->user_id?></h6>
+                                          </td>
+                                          <td>
+                                            <h6><?php echo $coment->contenido?></h6>
+                                          </td>
+                                          <td>
+                                            <a type="button" class="btn btn-danger btn-icon-text" href="<?=ROOT_PATH?>coments/delete/<?php echo $coment->id?>">
+                                              Delete Coment
+                                              <i class="ti-alert btn-icon-prepend"></i>                           
+                                            </a>
+                                          </td>
+                                          <td>
+                                          <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>coments/edit/<?php echo $coment->id?>">
+                                          Edit Post
+                                          <i class="ti-file btn-icon-append"></i>                          
+                                          </a>
+                                        </td>
+
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+<!-- fin coment -->
+
+
+
 
                       </div>
                     </div>

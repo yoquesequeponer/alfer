@@ -82,5 +82,29 @@ class PostsController extends Controller{
    //}
 }
 
+public function edit($id){
+   // if($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]){
+   //         header('Location:' . ROOT_PATH.$id);
+   // }
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+            $post = Post::where('id', $idPost)->find($idPost);
+            $titulo = $_POST['titulo'];
+            $contenido = $_POST['contenido'];
+            $categoria = $_POST['categoria'];
+            //die($post);
+            //die($titulo."XXX".$contenido."XXX".$categoria);
+            $post->update(['titulo'=> $titulo]);
+            //die($post->update(['titulo'=> $titulo, 'contenido'=> $contenido, 'categoria_id'=> $categoria]));
+            header('location:'. ROOT_PATH."admin/admin/");
+        }else{
+            $posts = new Post;
+            $post = $posts->where('id', $id)->find($id);
+            $categorias = Categorias::all();
+            $this->view('edit.html',['post'=>$post, 'categorias'=>$categorias]);
+        }
+}
+
 }
 ?>

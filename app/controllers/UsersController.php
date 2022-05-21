@@ -59,7 +59,7 @@ class UsersController extends Controller{
 
     public function edit($id){
         if($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]){
-                header('Location:' . ROOT_PATH.$id);
+                header('Location:' . ROOT_PATH);
         }
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -75,11 +75,9 @@ class UsersController extends Controller{
                 }else{
                     $password = md5( $_POST['password']);
                 }
-
                 $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
                 header('location:'. ROOT_PATH."admin/admin/");
             }else{
-                var_dump($id);
                 $users = new User;
                 $user = $users->where('id', $id)->find($id);
                 //die($user);
