@@ -40,7 +40,7 @@ class PostsController extends Controller{
 
     public function delete($id){
         //if (isset($_SESSION['is_logged_in'])) {
-        $post = new Posts;
+        $post = new Post;
         $posts = $post->destroy($id);
        header('location:'. ROOT_PATH);
     //}else{
@@ -59,7 +59,7 @@ class PostsController extends Controller{
             $post=new Post;
             
             $post->loadData($sanitize);
-            die($post);
+            
             
                 if ($post->validate()) {
                     $post->categoria_id = $_POST['select']; 

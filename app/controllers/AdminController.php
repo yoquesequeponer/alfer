@@ -4,7 +4,17 @@ class AdminController extends UsersController{
     public function admin(){
         $user = new User;
         $users = $user->all();
-        $this->view('admin.html',['users'=>$users]);
+        
+        $post = new Post;
+        $posts = $post->all();
+
+        $coment = new Coment;
+        $coments=$coment->all();
+
+        $categorias = Categorias::all();
+        
+
+        $this->view('admin.html',['users'=>$users, 'posts'=> $posts, 'coments'=>$coments, 'categorias'=>$categorias]);
     }
 
 

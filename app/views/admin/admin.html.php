@@ -356,10 +356,10 @@
                                           <p><?php echo $user->id?></p>
                                         </td>
                                         <td>
-                                        <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>admin/rol/<?php echo $user->id?>">
+                                          <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>admin/rol/<?php echo $user->id?>">
                                           Edit rol
                                           <i class="ti-file btn-icon-append"></i>                          
-                                        </button>
+                                          </a>
                                         </td>
                                       </tr>
                                       <?php endforeach ?>
@@ -401,27 +401,26 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        <td>
-                                          <div class="form-check form-check-flat mt-0">
-                                            <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <div class="d-flex ">
-                                            <img src="<?php echo ROOT_PATH?>public/template/images/faces/face1.jpg" alt="">
-                                            <div>
-                                              <h6>Brandon Washington</h6>
-                                              <p>Head admin</p>
+                                      <?php foreach ($data['categorias'] as $category) : ?>
+                                        <tr>
+                                          <td>
+                                            <div class="form-check form-check-flat mt-0">
+                                              <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
                                             </div>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <h6>Company name 1</h6>
-                                          <p>company type</p>
-                                        </td>
-                                      </tr>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex ">
+                                              <div>
+                                                <p><?php echo $category->id?></p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <h6><?php echo $category->descripcion?></h6>
+                                          </td>
+                                        </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                   </table>
                                 </div>
@@ -430,6 +429,80 @@
                           </div>
                         </div>
 <!-- fin categorias -->
+
+
+
+<!-- inicio Post -->
+                        <div class="row flex-grow">
+                          <div class="col-12 grid-margin stretch-card">
+                            <div class="card card-rounded">
+                              <div class="card-body">
+                                <div class="d-sm-flex justify-content-between align-items-start">
+                                  <div>
+                                    <h4 class="card-title card-title-dash">Posts</h4>
+                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
+                                  </div>
+                                  <div>
+                                    <a class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" href="<?=ROOT_PATH?>posts/add/"><i class="mdi mdi-account-plus"></i>Crear Post</a>
+                                  </div>
+                                </div>
+                                <div class="table-responsive  mt-1">
+                                  <table class="table select-table">
+                                    <thead>
+                                      <tr>
+                                        <th>
+                                          <div class="form-check form-check-flat mt-0">
+                                            <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
+                                          </div>
+                                        </th>
+                                        <th>ID</th>
+                                        <th>Titulo</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php foreach ($data['posts'] as $post) : ?>
+                                        <tr>
+                                          <td>
+                                            <div class="form-check form-check-flat mt-0">
+                                              <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i></label>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex ">
+                                              <div>
+                                                <p><?php echo $post->id?></p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <h6><?php echo $post->titulo?></h6>
+                                          </td>
+                                          <td>
+                                            <a type="button" class="btn btn-danger btn-icon-text" href="<?=ROOT_PATH?>posts/delete/<?php echo $post->id?>">
+                                              Delete Post
+                                              <i class="ti-alert btn-icon-prepend"></i>                           
+                                            </a>
+                                          </td>
+                                          <td>
+                                          <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>posts/edit/<?php echo $post->id?>">
+                                          Edit Post
+                                          <i class="ti-file btn-icon-append"></i>                          
+                                          </a>
+                                        </td>
+
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+<!-- fin Posts -->
+
 
 
                       </div>
