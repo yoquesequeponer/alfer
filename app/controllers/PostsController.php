@@ -31,16 +31,9 @@ class PostsController extends Controller{
     
     }
     public function read($id){
-        //$posts = Post::with('coments')->where('id',$id)->get();
-        //die($posts);
-        $posts = Post::where('id',$id)->find(1);
-        
+        $posts = Post::where('id', $id)->find($id);
 
         $coments = Coment::with('user')->where('post_id', $id)->get() ;
-        //$user = User::all();
-        //die($coments);
-        //print_r($posts);
-        //die($posts);
         $this->view('read.html',['post'=>$posts, 'coments'=>$coments]); 
     
     }

@@ -16,8 +16,7 @@
 					<h1 class="page-title">About us</h1>
 				</header>
                
-                
-				<h3>Lorem ipsum</h3>
+				<h3><?php echo $data['post']->titulo ?></h3>
 				<p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300" > </p>
                 <p><?php echo $data['post']->contenido ?></p>
 			

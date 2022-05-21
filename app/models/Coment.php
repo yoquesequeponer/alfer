@@ -7,9 +7,6 @@ class Coment extends Model{
         return $rules = array(
         'content'=>[self::RULE_REQUIRED],
         'user_id'=>[self::RULE_REQUIRED]
-    
-    
-    
     );
     }
         

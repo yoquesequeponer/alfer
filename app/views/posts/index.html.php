@@ -18,7 +18,7 @@ ob_start(); $form = new FormHelper;?>
 <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."posts/index";?>" method="POST">
 <?php foreach ($data['categorias'] as $categoria) : ?>
   <div class="custom-control custom-radio">
-  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="<?php echo($categoria->id)?>" name="category">
+  <input type="radio" id="customRadio1" class="custom-control-input" value="<?php echo($categoria->id)?>" name="category">
     <label class="custom-control-label"><?php echo($categoria->descripcion)?></label>
   </div>
 <?php endforeach?>
