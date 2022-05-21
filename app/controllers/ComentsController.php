@@ -25,8 +25,8 @@ class ComentsController extends Controller {
                     if ($coment->validate()) { 
                         $coment->contenido = $_POST['contenido'];
                         $coment->save();
-                        header('location:'. ROOT_PATH);
-                        }
+                        header('location:'. ROOT_PATH."posts/read/".$coment->post_id);
+                    }
        
            } else {
               
@@ -36,17 +36,24 @@ class ComentsController extends Controller {
            }    
     }
 
-    public function delete(){
-        //if (isset($_SESSION['is_logged_in'])) {       
-            $coment = new coments;
-            $coments = $coment->destroy($id);
-           header('location:'. ROOT_PATH);
-         // }else{
-         //   header('location:'. ROOT_PATH);
-         //
-         //   $error = 'You are not logged';
-         //   Messages::setMsg($error,'error');
-         //   }
+    public function delete($id){
+
+        if (isset($_SESSION['is_logged_in'])) {
+            $coment = new Coment;
+            $idUser = Coment::where('id',$id)->first();
+            if($idUser->user_id == $_SESSION['user_data']['id']){
+                $coments = $coment->destroy($id);
+            }
+
+           header('location:'. ROOT_PATH."posts/read/".$idUser->post_id);
+
+
+          }else{
+            header('location:'. ROOT_PATH);
+         
+            $error = 'You are not logged';
+            Messages::setMsg($error,'error');
+            }
     
     }
 

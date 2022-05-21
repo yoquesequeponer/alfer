@@ -84,6 +84,11 @@
                             <p>Nombre Usuario: <?php echo $table->user->userName ?></p>
 		    			  	<p>Contenido comentario: <?php echo $table->contenido ?></p>
 		    			  </div>
+						<?php if($table->user_id == $_SESSION['user_data']['id']){
+								echo "<a href=".ROOT_PATH."coments/delete/".$table->id." class="."btn btn-success".">Borrar comentario</a>";
+						}
+						?>
+
               </div>
               </div>
             <?php endforeach; ?>
