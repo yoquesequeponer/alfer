@@ -167,8 +167,6 @@ class ComposerStaticInitec291baab1bcf71b83406ef5d9873dec
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'User' => __DIR__ . '/../..' . '/app/models/User.php',
         'UsersController' => __DIR__ . '/../..' . '/app/controllers/UsersController.php',
-        'Valoration' => __DIR__ . '/../..' . '/app/models/Valoration.php',
-        'ValorationsController' => __DIR__ . '/../..' . '/app/controllers/ValorationsController.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 

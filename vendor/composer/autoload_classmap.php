@@ -26,7 +26,5 @@ return array(
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'User' => $baseDir . '/app/models/User.php',
     'UsersController' => $baseDir . '/app/controllers/UsersController.php',
-    'Valoration' => $baseDir . '/app/models/Valoration.php',
-    'ValorationsController' => $baseDir . '/app/controllers/ValorationsController.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

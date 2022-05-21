@@ -27,5 +27,8 @@ class Post extends Model{
     public function coments(){
         return $this->hasMany(Coment::class);
     }
+    public function filter(){
+        return $this->hasOne(Categorias::class);
+    }
 }
 ?>

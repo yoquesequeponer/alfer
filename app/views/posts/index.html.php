@@ -2,7 +2,7 @@
 
 use Symfony\Component\Console\Helper\Table;
 
-ob_start(); ?>
+ob_start(); $form = new FormHelper;?>
 <br>
 <br>
 <br>
@@ -14,6 +14,16 @@ ob_start(); ?>
 
 <div class="container">
   <a href="<?= ROOT_PATH ?>posts/add" class="btn btn-success">Añadir Libro</a>
+
+<form enctype="multipart/form-data" action="<?php echo ROOT_PATH."posts/index";?>" method="POST">
+<?php foreach ($data['categorias'] as $categoria) : ?>
+  <div class="custom-control custom-radio">
+  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="<?php echo($categoria->id)?>" name="category">
+    <label class="custom-control-label"><?php echo($categoria->descripcion)?></label>
+  </div>
+<?php endforeach?>
+<?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
+</form>
 
   <?php $numero = 0?>
       <div class="row">

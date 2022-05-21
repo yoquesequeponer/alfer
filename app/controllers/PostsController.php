@@ -8,13 +8,27 @@ class PostsController extends Controller{
             $page = "1";
         }
         //$posts=$post->all();
-        $perpage= 4;
+        $perpage= 10;
         $numRows=$post->count();
         $numPages=ceil($numRows/$perpage);
         $offset = ($page-1)*$perpage;
-        $posts=$post->offset($offset)->limit($perpage)->get();
-        
-        $this->view('index.html',['posts'=>$posts,'numpages'=>$numPages,'page'=>$page]);
+        $categorias = Categorias::all();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $post->loadData($sanitize);
+            $post->categoria_id = $_POST['category'];
+
+            $posts=Post::where('categoria_id', $post->categoria_id)->offset($offset)->limit($perpage)->get();
+            //die($posts);
+            $this->view('index.html',['posts'=>$posts,'numpages'=>$numPages,'page'=>$page, 'categorias'=>$categorias]);
+
+        }else{
+            $posts=$post->offset($offset)->limit($perpage)->get();
+            $this->view('index.html',['posts'=>$posts,'numpages'=>$numPages,'page'=>$page, 'categorias'=>$categorias]);
+
+        }
+    
     }
     public function read($id){
         //$posts = Post::with('coments')->where('id',$id)->get();
