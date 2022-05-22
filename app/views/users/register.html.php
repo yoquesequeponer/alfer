@@ -41,6 +41,27 @@ $form = new FormHelper;
                                 <label>Password <span class="text-danger">*</span></label>
                                 <?= $form->input('password', ['name'=>'password']) ?>
                             </div>
+                        <div class="top-margin">
+                            <label>Foto</label>
+                            <div class="dropdown">
+                                <button class="btn btn-danger btn-lg dropdown-toggle" type="button" id="dropdownMenuSizeButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton1">
+
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </div>
+                            
+                            <input type="file" class="form-control file-upload-info" name="foto" required>
+                        </div>
+
+
+
 
 
 
