@@ -1,7 +1,6 @@
 <?php 
 class UsersController extends Controller{
     public function register(){
-        // Controlar que las dos contraseñas son iguales
         $user= new User;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -31,12 +30,16 @@ class UsersController extends Controller{
 
             
             if ($user['password']==$post['password']){
-                
                 $_SESSION['is_logged_in'] = true;
                 $_SESSION['user_data'] = array(
                 "id" =>$user->id,
-                "name"=> $user->userName,
-                "correo" =>$user->correo,);
+                "userName"=> $user->userName,
+                "correo" =>$user->correo,
+                "name" => $user->nombre,
+                "apellido" => $user->apellido,
+                "rol"=> $user->rol
+                
+            );
                 header('Location:' . ROOT_PATH);
             }else{
                 Messages::setMsg('Incorrect Login', 'error');
@@ -58,9 +61,9 @@ class UsersController extends Controller{
     }
 
     public function edit($id){
-        if($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]){
-                header('Location:' . ROOT_PATH);
-        }
+        if( ($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]) && ($_SESSION['user_data']['id'] != 2) ){// si no eres propietario ni admin
+            header('Location:' . ROOT_PATH);
+        }// else -> eres o admin o propietario
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             
@@ -76,7 +79,11 @@ class UsersController extends Controller{
                     $password = md5( $_POST['password']);
                 }
                 $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
-                header('location:'. ROOT_PATH."admin/admin/");
+                if($_SESSION['user_data']['rol']== 2){
+                    header('location:'. ROOT_PATH."admin/admin");
+                }else{
+                    header('location:'. ROOT_PATH."escritor/escritor");
+                }
             }else{
                 $users = new User;
                 $user = $users->where('id', $id)->find($id);

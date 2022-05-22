@@ -2,6 +2,9 @@
 class AdminController extends UsersController{
 
     public function admin(){
+        if($_SESSION['user_data']['rol'] != 2){
+            header('location:'. ROOT_PATH);
+        }
         $user = new User;
         $users = $user->all();
         
@@ -21,6 +24,9 @@ class AdminController extends UsersController{
 
 
     public function rol($id){
+        if($_SESSION['user_data']['rol'] != 2){
+            header('location:'. ROOT_PATH);
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $idUsuario = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
@@ -34,14 +40,10 @@ class AdminController extends UsersController{
         }
     }
 
-    public function deleteComent(){//lamar usuario
-//lamar usuario
-    }//lamar usuario
-    public function deletePost(){//lamar usuario
-//lamar usuario
-    }//lamar usuario
-
     public function addCategory(){
+        if($_SESSION['user_data']['rol'] != 2){
+            header('location:'. ROOT_PATH);
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $category = new Categorias;            
@@ -57,6 +59,9 @@ class AdminController extends UsersController{
     }
 
     public function mod($id){
+        if($_SESSION['user_data']['rol'] != 2){
+            header('location:'. ROOT_PATH);
+        }
         $user = new User;
         $user->edit($id);
     }

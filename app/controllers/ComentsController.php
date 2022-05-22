@@ -13,6 +13,7 @@ class ComentsController extends Controller {
     }
 
     public function add(){
+        if(isset($_SESSION['is_logged_in'])){
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $coment=new Coment;
@@ -33,45 +34,63 @@ class ComentsController extends Controller {
                $model= new Coment;
                $coment = $model->all();
                $this->view('add.html');
-           }    
+           } 
+        }else{
+            header('location:'. ROOT_PATH);
+        }   
     }
 
     public function delete($id){
 
-        if (isset($_SESSION['is_logged_in'])) {
-            $coment = new Coment;
-            $idUser = Coment::where('id',$id)->first();
-            if($idUser->user_id == $_SESSION['user_data']['id']){
-                $coments = $coment->destroy($id);
+            if (isset($_SESSION['is_logged_in'])) {
+                $coment = new Coment;
+                $comentario = Coment::where('id',$id)->first();
+                if($comentario->user_id == $_SESSION['user_data']['id']){//propietario
+                    $coments = $coment->destroy($id);
+                }elseif($_SESSION['user_data']['id']== 2){//admin
+                    $coments = $coment->destroy($id);
+                }
+
+               header('location:'. ROOT_PATH."posts/read/".$comentario->post_id);
+
+
+              }else{
+                header('location:'. ROOT_PATH);
+            
+                $error = 'You are not logged';
+                Messages::setMsg($error,'error');
             }
-
-           header('location:'. ROOT_PATH."posts/read/".$idUser->post_id);
-
-
-          }else{
-            header('location:'. ROOT_PATH);
-         
-            $error = 'You are not logged';
-            Messages::setMsg($error,'error');
-            }
-    
+            
     }
 
     public function edit($id){
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            
-            $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
-            $coment = Coment::where('id', $idPost)->find($idPost);
-            $contenido = $_POST['contenido'];
-            $coment->update(['contenido'=> $contenido]);
-            header('location:'. ROOT_PATH."admin/admin/");
+        if (isset($_SESSION['is_logged_in'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {                  
+                $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+                $coment = Coment::where('id', $idPost)->find($idPost);
+
+                if($coment->user_id == $_SESSION['user_data']['id']){//propietario
+                    $contenido = $_POST['contenido'];
+                    $coment->update(['contenido'=> $contenido]);
+                }
+
+                if($_SESSION['user_data']['id']== 2){
+                    header('location:'. ROOT_PATH."/admin/admin/".$idPost);
+                }elseif($_SESSION['user_data']['id']== 1){
+                    header('location:'. ROOT_PATH."/escritor/escritor/".$idPost);
+                }else{
+                    header('location:'. ROOT_PATH."/posts/read/".$idPost);
+                }
+            }else{
+                $coments = new Coment;
+                $coment = $coments->where('id', $id)->find($id);
+                $this->view('edit.html',['coment'=>$coment]);
+            }
         }else{
-            $coments = new Coment;
-            $coment = $coments->where('id', $id)->find($id);
-            $this->view('edit.html',['coment'=>$coment]);
+            header('location:'. ROOT_PATH);
         }
-}
+    }
 
 }
 ?>

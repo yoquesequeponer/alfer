@@ -155,6 +155,7 @@ class ComposerStaticInitec291baab1bcf71b83406ef5d9873dec
         'ComentsController' => __DIR__ . '/../..' . '/app/controllers/ComentsController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Controller' => __DIR__ . '/../..' . '/app/core/Controller.php',
+        'EscritorController' => __DIR__ . '/../..' . '/app/controllers/EscritorController.php',
         'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
         'Files' => __DIR__ . '/../..' . '/app/models/Files.php',
         'FormHelper' => __DIR__ . '/../..' . '/app/core/FormHelper.php',

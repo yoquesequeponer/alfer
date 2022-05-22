@@ -33,77 +33,99 @@ class PostsController extends Controller{
     public function read($id){
         $posts = Post::where('id', $id)->find($id);
 
-        $coments = Coment::with('user')->where('post_id', $id)->get() ;
+        $coments = Coment::with('user')->where('post_id', $id)->get();
         $this->view('read.html',['post'=>$posts, 'coments'=>$coments]); 
     
     }
 
     public function delete($id){
-        //if (isset($_SESSION['is_logged_in'])) {
-        $post = new Post;
-        $posts = $post->destroy($id);
-       header('location:'. ROOT_PATH);
-    //}else{
-    //    header('location:'. ROOT_PATH);
-//
-    //    $error = 'You are not logged';
-    //    Messages::setMsg($error,'error');
-    //}
+        if (isset($_SESSION['is_logged_in'])) {
+                $post = new Post;
+                $datosPost = $post->where('id', $id)->find($id);
+                if(($_SESSION['user_data']['rol']== 2) || ($datosPost->user_id == $_SESSION['user_data']['id'])){//admin o propietario
+                    $posts = $post->destroy($id);
+                }else{
+                    header('location:'. ROOT_PATH);
+                }
+            }else{
+                header('location:'. ROOT_PATH);
+
+                $error = 'You are not logged';
+                Messages::setMsg($error,'error');
+    }
   
     }
 
     public function add() {
-    //if (isset($_SESSION['is_logged_in'])) {       
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $post=new Post;
-            
-            $post->loadData($sanitize);
-            
-            
-                if ($post->validate()) {
-                    $post->categoria_id = $_POST['select']; 
-                    $post-> $_SESSION['user_data']['id'];           
-                    $post->save();
-                    header('location:'. ROOT_PATH);
-                }
-                
-        } else {
-            $categorias = Categorias::all();
-            $model= new Post;
-            $posts = $model->all();
-            $this->view('add.html',['categorias'=>$categorias]);
-        }
-   //}else{
-   //    header('location:'. ROOT_PATH);
+         if (isset($_SESSION['is_logged_in'])) { 
+             if($_SESSION['user_data']['rol'] == 0){
+                header('location:'. ROOT_PATH);
+             }      
+             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                 $sanitize = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                 $post=new Post;
 
-   //    $error = 'You are not logged';
-   //    Messages::setMsg($error,'error');
-   //}
-}
+                 $post->loadData($sanitize);
+
+
+                     if ($post->validate()) {
+                         $post->categoria_id = $_POST['select']; 
+                         $post->user_id = $_SESSION['user_data']['id'];           
+                         $post->save();
+                         if($_SESSION['user_data']['id']== 2){
+                            header('location:'. ROOT_PATH."/admin/admin");
+                        }else{
+                            header('location:'. ROOT_PATH."/escritor/escritor");
+                        }
+                     }
+             } else {
+                 $categorias = Categorias::all();
+                 $model= new Post;
+                 $posts = $model->all();
+                 $this->view('add.html',['categorias'=>$categorias]);
+             }
+        }else{
+            header('location:'. ROOT_PATH);
+        }
+    }
+
 
 public function edit($id){
    // if($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]){
    //         header('Location:' . ROOT_PATH.$id);
    // }
+   if (isset($_SESSION['is_logged_in'])) { //log
+
+        if( ($_SESSION['user_data']['rol']!= 0)){// admin o escritor
+
         
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
-            $post = Post::where('id', $idPost)->find($idPost);
-            $titulo = $_POST['titulo'];
-            $contenido = $_POST['contenido'];
-            $categoria = $_POST['categoria'];
-            //die($post);
-            //die($titulo."XXX".$contenido."XXX".$categoria);
-            $post->update(['titulo'=> $titulo]);
-            //die($post->update(['titulo'=> $titulo, 'contenido'=> $contenido, 'categoria_id'=> $categoria]));
-            header('location:'. ROOT_PATH."admin/admin/");
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+                $post = Post::where('id', $idPost)->find($idPost);
+                $titulo = $_POST['titulo'];
+                $contenido = $_POST['contenido'];
+                $categoria = $_POST['categoria'];
+                //die($post);
+                //die($titulo."XXX".$contenido."XXX".$categoria);
+                $post->update(['titulo'=> $titulo, 'contenido'=> $contenido, 'categoria'=>$categoria]);
+                //die($post->update(['titulo'=> $titulo, 'contenido'=> $contenido, 'categoria_id'=> $categoria]));
+                if($_SESSION['user_data']['rol']== 2){
+                    header('location:'. ROOT_PATH."admin/admin");
+                }else{
+                    header('location:'. ROOT_PATH."escritor/escritor");
+                }
+            }else{
+                $posts = new Post;
+                $post = $posts->where('id', $id)->find($id);
+                $categorias = Categorias::all();
+                $this->view('edit.html',['post'=>$post, 'categorias'=>$categorias]);
+            }
         }else{
-            $posts = new Post;
-            $post = $posts->where('id', $id)->find($id);
-            $categorias = Categorias::all();
-            $this->view('edit.html',['post'=>$post, 'categorias'=>$categorias]);
+            header('location:'. ROOT_PATH);
         }
+    }else{
+        header('location:'. ROOT_PATH);
+    }
 }
 
 }

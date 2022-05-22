@@ -14,6 +14,7 @@ return array(
     'ComentsController' => $baseDir . '/app/controllers/ComentsController.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Controller' => $baseDir . '/app/core/Controller.php',
+    'EscritorController' => $baseDir . '/app/controllers/EscritorController.php',
     'FPDF' => $vendorDir . '/setasign/fpdf/fpdf.php',
     'Files' => $baseDir . '/app/models/Files.php',
     'FormHelper' => $baseDir . '/app/core/FormHelper.php',

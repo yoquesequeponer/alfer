@@ -18,7 +18,7 @@ class Post extends Model{
     }
     
     public function attributes(): array {
-        return ['titulo','contenido','authors'];
+        return ['titulo','contenido'];
     }
     
    //public function files(){
@@ -29,6 +29,9 @@ class Post extends Model{
     }
     public function filter(){
         return $this->hasOne(Categorias::class);
+    }
+    public function user(){
+        return $this->hasOne(User::class);
     }
 }
 ?>
