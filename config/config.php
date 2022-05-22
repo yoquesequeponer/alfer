@@ -2,9 +2,19 @@
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_NAME", "alfer");
-
 define("ROOT_PATH", "/alfer/");
 define("ROOT_URL","");
+
+
+//define("DB_HOST", "sql111.epizy.com");
+//define("DB_USER", "epiz_31784315");
+//define("DB_PW", "aokQLLOBjbcjAWp");
+//define("DB_NAME", "epiz_31784315_alfer");
+//
+//define("ROOT_PATH", "/");
+//define("ROOT_URL","");
+
+
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 // connect to database

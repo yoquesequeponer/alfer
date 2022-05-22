@@ -34,7 +34,7 @@ ob_start(); $form = new FormHelper;?>
             break;
           }?>
           <div class="col-md-3 col-sm-6 highlight">
-					  <div class="h-caption"><h4><img src="<?php echo ROOT_PATH?>public/assets/images/spiderman.jpg"></h4></div>
+					  <div class="h-caption"><h4><img src="data:img/jpg;base64,<?php echo base64_encode($table->files->filedata); ?>"></h4></div>
 					  <div class="h-body text-center">
 					  	<p><?php echo $table->contenido ?></p>
               <a href="<?php echo ROOT_PATH ."posts/read/". $table->id?>">Enlace</a>

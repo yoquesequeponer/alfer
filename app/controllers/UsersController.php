@@ -62,11 +62,12 @@ class UsersController extends Controller{
 
     public function edit($id){
         if( ($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]) && ($_SESSION['user_data']['id'] != 2) ){// si no eres propietario ni admin
+            //die("salho")
             header('Location:' . ROOT_PATH);
         }// else -> eres o admin o propietario
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            
+                            //die("poS");
                 $idUsuario = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
                 $user = User::where('id', $idUsuario)->find($idUsuario);
                 $username = $_POST['username'];
@@ -78,11 +79,22 @@ class UsersController extends Controller{
                 }else{
                     $password = md5( $_POST['password']);
                 }
+                $_SESSION['user_data'] = array(
+                    "id" =>$idUsuario,
+                    "userName"=> $username,
+                    "correo" =>$user->correo,
+                    "name" => $user->nombre,
+                    "apellido" => $apellido,
+                );
+    
                 $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
+                //die($user);
                 if($_SESSION['user_data']['rol']== 2){
                     header('location:'. ROOT_PATH."admin/admin");
-                }else{
+                }elseif($_SESSION['user_data']['rol']== 1){
                     header('location:'. ROOT_PATH."escritor/escritor");
+                }else{
+                    header('location:'. ROOT_PATH."users/user");
                 }
             }else{
                 $users = new User;
@@ -90,6 +102,22 @@ class UsersController extends Controller{
                 //die($user);
                 $this->view('edit.html',['user'=>$user]);
             }
+    }
+
+    public function user(){
+        //if($_SESSION['user_data']['rol'] == 0){
+        //    header('location:'. ROOT_PATH);
+        //}
+        $user = new User;
+        $users = $user->find($_SESSION['user_data']['id']);
+
+        $coment = new Coment;
+        $coments=$coment->where('user_id',$_SESSION['user_data']['id'])->get();
+
+
+
+        $this->view('user.html',['users'=>$users, 'coments'=>$coments]);
+        
     }
 }
 

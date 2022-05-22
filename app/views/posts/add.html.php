@@ -29,7 +29,7 @@ $form = new FormHelper;
                         </div>
                         <div class="top-margin">
                             <label>Foto</label>
-                            <?= $form->input('text', ['name'=>'apellido']) ?>
+                            <input type="file" class="form-control file-upload-info" name="foto" required>
                         </div>
                         <div class="top-margin">
                             <label>Categoria</label>

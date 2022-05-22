@@ -21,9 +21,9 @@ class Post extends Model{
         return ['titulo','contenido'];
     }
     
-   //public function files(){
-   //    return $this->hasOne('Files');
-   //}
+   public function files(){
+       return $this->hasOne('Files');
+   }
     public function coments(){
         return $this->hasMany(Coment::class);
     }

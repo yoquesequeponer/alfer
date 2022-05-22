@@ -44,6 +44,11 @@ class PostsController extends Controller{
                 $datosPost = $post->where('id', $id)->find($id);
                 if(($_SESSION['user_data']['rol']== 2) || ($datosPost->user_id == $_SESSION['user_data']['id'])){//admin o propietario
                     $posts = $post->destroy($id);
+                    if($_SESSION['user_data']['rol']== 2){
+                        header('location:'. ROOT_PATH."admin/admin");
+                    }else{
+                        header('location:'. ROOT_PATH."escrito/escritor");
+                    }
                 }else{
                     header('location:'. ROOT_PATH);
                 }
@@ -52,8 +57,8 @@ class PostsController extends Controller{
 
                 $error = 'You are not logged';
                 Messages::setMsg($error,'error');
-    }
-  
+            }
+
     }
 
     public function add() {
@@ -72,10 +77,29 @@ class PostsController extends Controller{
                          $post->categoria_id = $_POST['select']; 
                          $post->user_id = $_SESSION['user_data']['id'];           
                          $post->save();
+
+                         if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
+                            $error = 'There was no file uploaded';
+                        Messages::setMsg($error,'error');
+                            $this->view('add.html');
+                            return;
+                        }
+                        $uploadfile = $_FILES['foto']['tmp_name'];
+                        $uploaddata['filedata'] = file_get_contents($uploadfile);
+                        $uploaddata['filename'] = $_FILES['foto']['tmp_name'];
+                        $uploaddata['mimetype'] = $_FILES['foto']['tmp_name'];
+                        $file = new Files;
+                        $file->loadData($uploaddata);
+                            if($file->validate()){
+                                $post->files()->save($file);
+                            }else{
+                                $error = 'There was an error while uploading the file';
+                            }
+
                          if($_SESSION['user_data']['id']== 2){
-                            header('location:'. ROOT_PATH."/admin/admin");
+                            header('location:'. ROOT_PATH."admin/admin");
                         }else{
-                            header('location:'. ROOT_PATH."/escritor/escritor");
+                            header('location:'. ROOT_PATH."escritor/escritor");
                         }
                      }
              } else {
