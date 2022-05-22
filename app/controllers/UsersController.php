@@ -10,6 +10,24 @@ class UsersController extends Controller{
             $user->loadData($post);
             if($user->validate()){
                 $user->save();
+                if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
+                    $error = 'There was no file uploaded';
+                Messages::setMsg($error,'error');
+                    $this->view('add.html');
+                    return;
+                }
+                $uploadfile = $_FILES['foto']['tmp_name'];
+                $uploaddata['filedata'] = file_get_contents($uploadfile);
+                $uploaddata['filename'] = $_FILES['foto']['tmp_name'];
+                $uploaddata['mimetype'] = $_FILES['foto']['tmp_name'];
+                $file = new FileUser;
+                $file->loadData($uploaddata);
+                    if($file->validate()){
+                        $user->files()->save($file);
+                    }else{
+                        $error = 'There was an error while uploading the file';
+                    }
+
                 header('Location:' . ROOT_PATH);
             }
         }else{
@@ -67,7 +85,6 @@ class UsersController extends Controller{
         }// else -> eres o admin o propietario
             
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            //die("poS");
                 $idUsuario = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
                 $user = User::where('id', $idUsuario)->find($idUsuario);
                 $username = $_POST['username'];
@@ -86,9 +103,23 @@ class UsersController extends Controller{
                     "name" => $user->nombre,
                     "apellido" => $apellido,
                 );
-    
                 $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
-                //die($user);
+                if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
+                    $error = 'There was no file uploaded';
+                Messages::setMsg($error,'error');
+                    $this->view('add.html');
+                    return;
+                }
+                $uploadfile = $_FILES['foto']['tmp_name'];
+                $uploaddata['filedata'] = file_get_contents($uploadfile);
+                $uploaddata['filename'] = $_FILES['foto']['tmp_name'];
+                $uploaddata['mimetype'] = $_FILES['foto']['tmp_name'];
+                $file = new FileUser;
+                //$file = $files->where('user_id',$idUsuario)->find($idUsuario);
+                //die(print_r($uploaddata));
+                        $user->files()->update(['filedata'=>$uploaddata['filedata'] ,'filename'=> $uploaddata['filename'],'mimetype'=> $uploaddata['mimetype']]);
+
+
                 if($_SESSION['user_data']['rol']== 2){
                     header('location:'. ROOT_PATH."admin/admin");
                 }elseif($_SESSION['user_data']['rol']== 1){
@@ -99,23 +130,16 @@ class UsersController extends Controller{
             }else{
                 $users = new User;
                 $user = $users->where('id', $id)->find($id);
-                //die($user);
                 $this->view('edit.html',['user'=>$user]);
             }
     }
 
     public function user(){
-        //if($_SESSION['user_data']['rol'] == 0){
-        //    header('location:'. ROOT_PATH);
-        //}
         $user = new User;
         $users = $user->find($_SESSION['user_data']['id']);
 
         $coment = new Coment;
         $coments=$coment->where('user_id',$_SESSION['user_data']['id'])->get();
-
-
-
         $this->view('user.html',['users'=>$users, 'coments'=>$coments]);
         
     }

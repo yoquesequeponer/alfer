@@ -1,49 +1,55 @@
-<?php ob_start();?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog Post - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="<?php echo ROOT_PATH?>public/template/read/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="<?php echo ROOT_PATH?>public/template/read/css/styles.css" rel="stylesheet" />
 
-	<!-- container -->
-	<div class="container">
-
-		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
-			<li class="active">About</li>
-		</ol>
-
-		<div class="row">
-			
-			<!-- Article main content -->
-			<article class="col-sm-8 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">About us</h1>
-				</header>
-               
-				<h3><?php echo $data['post']->titulo ?></h3>
-				<p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300" > </p>
-                <p><?php echo $data['post']->contenido ?></p>
-			
-			</article>
-			<!-- /Article -->
-			
-			<!-- Sidebar -->
-			<!-- <aside class="col-sm-4 sidebar sidebar-right">
-
-				<div class="widget">
-					<h4>Vacancies</h4>
-					<ul class="list-unstyled list-spaces">
-						<li><a href="">Lorem ipsum dolor</a><br><span class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, laborum.</span></li>
-						<li><a href="">Totam, libero, quis</a><br><span class="small text-muted">Suscipit veniam debitis sed ipsam quia magnam eveniet perferendis nisi.</span></li>
-						<li><a href="">Enim, sequi dignissimos</a><br><span class="small text-muted">Reprehenderit illum quod unde quo vero ab inventore alias veritatis.</span></li>
-						<li><a href="">Suscipit, consequatur, aut</a><br><span class="small text-muted">Sed, mollitia earum debitis est itaque esse reiciendis amet cupiditate.</span></li>
-						<li><a href="">Nam, illo, veritatis</a><br><span class="small text-muted">Delectus, sapiente illo provident quo aliquam nihil beatae dignissimos itaque.</span></li>
-					</ul>
-				</div>
-
-			</aside> -->
-			<!-- /Sidebar -->
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="<?php echo ROOT_PATH?>public/template/read/#!">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="<?php echo ROOT_PATH?>public/template/read/#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo ROOT_PATH?>public/template/read/#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo ROOT_PATH?>public/template/read/#!">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?php echo ROOT_PATH?>public/template/read/#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
 
-		</div>
-	</div>	<!-- /container -->
-	<a href="<?= ROOT_PATH ?>coments/add/<?php echo $data['post']->id?>" class="btn btn-success">Añadir comentario</a>
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1"><?php echo $data['post']->titulo ?></h1>
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="data:img/jpg;base64,<?php echo base64_encode($data['post']->files->filedata); ?>" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4"><?php echo $data['post']->contenido ?></p>
+                        </section>
+                    </article>
+                    <!-- Comments section-->
+                    <a href="<?= ROOT_PATH ?>coments/add/<?php echo $data['post']->id?>" class="btn btn-success">Añadir comentario</a>
 	<div class="posts-wrapper">
    	<div class="post">
       <div class="post-info">
@@ -72,26 +78,39 @@
    	</div>
   </div>
   <script src="<?php echo ROOT_PATH?>public/assets/js/scripts.js"></script>
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <?php foreach ($data['coments'] as $table) : ?>
 
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['user']->files->filedata); ?>" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold"><?php echo $table->user->userName ?></div>
+                                        <?php echo $table->contenido ?>
+                                    </div>
+                                    <?php if($table->user_id == $_SESSION['user_data']['id']){
+                                        echo "<a href=".ROOT_PATH."coments/delete/".$table->id." class="."btn btn-success".">Borrar comentario</a>";
+                                    }?>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="<?php echo ROOT_PATH?>public/template/read/js/scripts.js"></script>
 
-    <div class="column">
-    <div class="row">
-            <?php foreach ($data['coments'] as $table) : ?>
-                <div class="row">
-              <div class="col-md-3 col-sm-6 highlight">
-		    			  <div class="h-body text-center">
-                            <p>Nombre Usuario: <?php echo $table->user->userName ?></p>
-		    			  	<p>Contenido comentario: <?php echo $table->contenido ?></p>
-		    			  </div>
-						<?php if($table->user_id == $_SESSION['user_data']['id']){
-								echo "<a href=".ROOT_PATH."coments/delete/".$table->id." class="."btn btn-success".">Borrar comentario</a>";
-						}
-						?>
-
-              </div>
-              </div>
-            <?php endforeach; ?>
-      </div>
-      </div>
-<?php $content = ob_get_clean()?>
-<?php include 'app/views/layout.html.php'?>
+    </body>
+</html>

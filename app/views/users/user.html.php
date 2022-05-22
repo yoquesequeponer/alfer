@@ -61,10 +61,10 @@
           </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="<?php echo ROOT_PATH?>public/template/images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="<?php echo ROOT_PATH?>public/template/images/faces/face8.jpg" alt="Profile image">
+                <img class="img-md rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                 <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
               </div>
@@ -334,11 +334,30 @@
                                     <label for="exampleInputUsername1">Contraseña</label>
                                     <input type="text" class="form-control" id="exampleInputUsername1" name="password" value="<?php echo $data['users']->correo?>"disabled >
                                   </div>
+                                  <div class="form-group">
 
-                                          <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>users/edit/<?php echo $_SESSION['user_data']['id']?>">
-                                          Edit profile
-                                          <i class="ti-file btn-icon-append"></i>                          
-                                          </a>
+                                      <input accept="image/*" type='file' id="imgInp" name="foto" disabled/>
+                                      <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                          <img class="img-fluid" id="blah" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="your image" />
+                                        </div>
+                                      </div>
+                                      <div>
+                                      </div>
+                                    <script>
+                                      imgInp.onchange = evt => {
+                                        const [file] = imgInp.files
+                                        if (file) {
+                                          blah.src = URL.createObjectURL(file)
+                                        }
+                                      }
+                                    </script>
+                                  </div>
+
+                                    <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>users/edit/<?php echo $_SESSION['user_data']['id']?>">
+                                    Edit profile
+                                    <i class="ti-file btn-icon-append"></i>                          
+                                    </a>
                                   <button class="btn btn-light">Cancel</button>
                                 </form>
                               </div>

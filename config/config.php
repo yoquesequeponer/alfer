@@ -21,7 +21,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = mysqli_connect('localhost', 'root', '', 'ALFER');
 
 // lets assume a user is logged in with id $user_id
-if($_SESSION['is_logged_in']){
+if(isset($_SESSION['is_logged_in'])){
 $user_id = $_SESSION['user_data']['id'];
 
 if (!$conn) {

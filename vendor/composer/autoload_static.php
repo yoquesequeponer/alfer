@@ -157,6 +157,7 @@ class ComposerStaticInitec291baab1bcf71b83406ef5d9873dec
         'Controller' => __DIR__ . '/../..' . '/app/core/Controller.php',
         'EscritorController' => __DIR__ . '/../..' . '/app/controllers/EscritorController.php',
         'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
+        'FileUser' => __DIR__ . '/../..' . '/app/models/FileUser.php',
         'Files' => __DIR__ . '/../..' . '/app/models/Files.php',
         'FormHelper' => __DIR__ . '/../..' . '/app/core/FormHelper.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',

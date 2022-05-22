@@ -3,7 +3,7 @@
 class User extends Model{
 
 
-protected $fillable = ['userName', 'correo', 'password','nombre'];
+protected $fillable = ['userName', 'correo', 'password','nombre','categoria_id'];
 protected $guarded = ['id'];
 
 public function rules(): array{
@@ -11,10 +11,15 @@ public function rules(): array{
         'userName'=> [self::RULE_REQUIRED],
         'correo'=> [self:: RULE_REQUIRED, self:: RULE_EMAIL],
         'password'=> [self:: RULE_REQUIRED],
-        'confirmpassword'=>[self::RULE_REQUIRED, [self:: RULE_MATCH, 'match '=>'password']]);
+        'confirmpassword'=>[self::RULE_REQUIRED],
+        "categoria_id"=>[self::RULE_REQUIRED],
+    
+    );
         
 }
-
+public function files(){
+    return $this->hasOne('FileUser');
+}
 public function tableName(): string{
     return 'users';
 }

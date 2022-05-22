@@ -16,6 +16,7 @@ return array(
     'Controller' => $baseDir . '/app/core/Controller.php',
     'EscritorController' => $baseDir . '/app/controllers/EscritorController.php',
     'FPDF' => $vendorDir . '/setasign/fpdf/fpdf.php',
+    'FileUser' => $baseDir . '/app/models/FileUser.php',
     'Files' => $baseDir . '/app/models/Files.php',
     'FormHelper' => $baseDir . '/app/core/FormHelper.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',

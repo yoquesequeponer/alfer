@@ -25,6 +25,25 @@
                       <label for="exampleInputUsername1">Correo</label>
                       <input type="text" class="form-control" id="exampleInputUsername1" name="correo" value="<?php echo $data['user']['correo']?>" >
                     </div>
+                    <div class="form-group">
+
+                        <input accept="image/*" type='file' id="imgInp" name="foto"/>
+                        <div class="row">
+                          <div class="col-md-6 offset-md-3">
+                            <img class="img-fluid" id="blah" src="data:img/jpg;base64,<?php echo base64_encode($data['user']->files->filedata); ?>" alt="your image" />
+                          </div>
+                        </div>
+                        <div>
+                        </div>
+                      <script>
+                        imgInp.onchange = evt => {
+                          const [file] = imgInp.files
+                          if (file) {
+                            blah.src = URL.createObjectURL(file)
+                          }
+                        }
+                      </script>
+                    </div>                    
                     <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
                     <button class="btn btn-light">Cancel</button>
                   </form>
