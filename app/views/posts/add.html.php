@@ -45,7 +45,7 @@ $form = new FormHelper;
                             <div class="col-lg-4 text-right">
                                 <!-- <button class="btn btn-action" type="submit">Register</button> -->
                                 <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
-                                 <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
+                                 <a class="btn btn-light" href="<?= ROOT_PATH ?>escritor/escritor">Cancel</a>
                             </div>
                         </div>
                     </form>

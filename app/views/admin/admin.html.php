@@ -187,75 +187,43 @@
               <p class="text-gray mb-0 ">Call Sarah Graves</p>
             </div>
           </div>
-          <!-- To do section tab ends -->
-          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-            <div class="d-flex align-items-center justify-content-between border-bottom">
-              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
-            </div>
-            <ul class="chat-list">
-              <li class="list active">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Thomas Douglas</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">19 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <div class="wrapper d-flex">
-                    <p>Catherine</p>
-                  </div>
-                  <p>Away</p>
-                </div>
-                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                <small class="text-muted my-auto">23 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Daniel Russell</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">14 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <p>James Richardson</p>
-                  <p>Away</p>
-                </div>
-                <small class="text-muted my-auto">2 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Madeline Kennedy</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">5 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Sarah Graves</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">47 min</small>
-              </li>
-            </ul>
-          </div>
-          <!-- chat tab ends -->
         </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
+      <ul class="nav">
 
-
+        <li class="nav-item">
+            <a class="nav-link" href="<?= ROOT_PATH ?>">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Inicio</span>
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT_PATH?>users/edit/<?php echo $_SESSION['user_data']['id'] ?>">
+            <i class="mdi mdi-account-circle-outline menu-icon"></i>
+            <span class="menu-title">Editar Perfil</span>
+          </a>
+        </li>
+        <?php if($_SESSION['user_data']['rol'] != 0 ): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT_PATH?>posts/add/">
+            <i class="mdi mdi-newspaper menu-icon"></i>
+            <span class="menu-title">Añadir Post</span>
+          </a>
+        </li>
+          <?php if($_SESSION['user_data']['rol'] == 2): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT_PATH?>admin/addCategory/">
+              <i class="mdi mdi-tag menu-icon"></i>
+              <span class="menu-title">Añadir Categoria</span>
+            </a>
+          </li>
+          
+          <?php endif ?>
+        <?php endif ?>
+          </ul>
       </nav>
       <!-- partial -->
       <div class="main-panel">
@@ -311,7 +279,7 @@
                                         </td>
                                         <td>
                                           <div class="d-flex ">
-                                            <img src="<?php echo ROOT_PATH?>public/template/images/faces/face1.jpg" alt="">
+                                            <img src="data:img/jpg;base64,<?php echo base64_encode($user->files->filedata); ?>" alt="">
                                             <div>
                                               <h6><?php echo $user->userName?></h6>
                                               <p><?php echo $user->rol?></p>
@@ -349,7 +317,6 @@
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Categorias</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
                                   </div>
                                   <div>
                                     <a class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" href="<?=ROOT_PATH?>admin/addCategory/"><i class="mdi mdi-account-plus"></i>Añadir nueva categoria</a>
@@ -409,7 +376,6 @@
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Posts</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
                                   </div>
                                   <div>
                                     <a class="btn btn-primary btn-lg text-white mb-0 me-0" type="button" href="<?=ROOT_PATH?>posts/add/"><i class="mdi mdi-account-plus"></i>Crear Post</a>
@@ -481,7 +447,6 @@
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Comentarios</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">
@@ -531,13 +496,14 @@
                                               <i class="ti-alert btn-icon-prepend"></i>                           
                                             </a>
                                           </td>
+                                          <?php if($_SESSION['user_data']['id'] == $coment->user_id) : ?>
                                           <td>
                                           <a type="button" class="btn btn-sm btn-info btn-icon-text" href="<?=ROOT_PATH?>coments/edit/<?php echo $coment->id?>">
-                                          Edit Post
+                                          Edit Coment
                                           <i class="ti-file btn-icon-append"></i>                          
                                           </a>
                                         </td>
-
+                                        <?php endif ?>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>

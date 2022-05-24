@@ -45,7 +45,7 @@
                       </script>
                     </div>                    
                     <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
-                    <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
+                    <a class="btn btn-light" href="<?= ROOT_PATH ?>users/user">Cancel</a>
                   </form>
                 </div>
               </div>

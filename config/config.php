@@ -20,10 +20,9 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 // connect to database
 $conn = mysqli_connect(DB_HOST, DB_USER, "", DB_NAME);
 
-// lets assume a user is logged in with id $user_id
 if(isset($_SESSION['is_logged_in'])){
 $user_id = $_SESSION['user_data']['id'];
-}
+
 
 if (!$conn) {
     die("Error connecting to database: " . mysqli_connect_error($conn));
@@ -60,6 +59,7 @@ if (!$conn) {
     echo getRating($post_id);
     exit(0);
   }
+}
   
   // Get total number of likes for a particular post
   function getLikes($id)
@@ -102,6 +102,9 @@ if (!$conn) {
     return json_encode($rating);
   }
   
+  if(isset($_SESSION['is_logged_in'])){
+    $user_id = $_SESSION['user_data']['id'];
+    
   // Check if user already likes post or not
   function userLiked($post_id)
   {
@@ -131,6 +134,7 @@ if (!$conn) {
         return false;
     }
   }
+}
   
   $sql = "SELECT * FROM posts";
   $result = mysqli_query($conn, $sql);

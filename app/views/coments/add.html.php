@@ -28,7 +28,7 @@ $form = new FormHelper;
                             <div class="col-lg-4 text-right">
                                 <!-- <button class="btn btn-action" type="submit">Sign in</button> -->
                                 <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
-                                 <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
+                                 <a class="btn btn-light" href="<?php echo ROOT_PATH."posts/read/".array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]?>">Cancel</a>
                             </div>
                         </div>
                     </form>

@@ -28,11 +28,11 @@
 
 
         <ul class="navbar-nav ms-auto">
-                <?php if($_SESSION['user_data']['rol']!=0) : ?>
+                <?php if($_SESSION['user_data']['rol'] !=0) : ?>
           <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">Selecciona vista</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" href="<?php echo ROOT_PATH ."posts/read/". $table->id?>">
+              <a class="dropdown-item py-3" href="#">
                 <p class="mb-0 font-weight-medium float-left">Vistas disponibles</p>
               </a>
               <?php if($_SESSION['user_data']['rol']==2) : ?>
@@ -68,7 +68,7 @@
               <img class="img-xs rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image">
+                <img class="img-md rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" width="100px" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold"><?php echo $_SESSION['user_data']['name']; ?></p>
                 <p class="fw-light text-muted mb-0"><?php echo $_SESSION['user_data']['correo']; ?></p>
               </div>
@@ -191,75 +191,45 @@
               <p class="text-gray mb-0 ">Call Sarah Graves</p>
             </div>
           </div>
-          <!-- To do section tab ends -->
-          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-            <div class="d-flex align-items-center justify-content-between border-bottom">
-              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
-            </div>
-            <ul class="chat-list">
-              <li class="list active">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Thomas Douglas</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">19 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <div class="wrapper d-flex">
-                    <p>Catherine</p>
-                  </div>
-                  <p>Away</p>
-                </div>
-                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                <small class="text-muted my-auto">23 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Daniel Russell</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">14 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
-                <div class="info">
-                  <p>James Richardson</p>
-                  <p>Away</p>
-                </div>
-                <small class="text-muted my-auto">2 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Madeline Kennedy</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">5 min</small>
-              </li>
-              <li class="list">
-                <div class="profile"><img src="<?php echo ROOT_PATH?>public/template/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
-                <div class="info">
-                  <p>Sarah Graves</p>
-                  <p>Available</p>
-                </div>
-                <small class="text-muted my-auto">47 min</small>
-              </li>
-            </ul>
-          </div>
-          <!-- chat tab ends -->
+
         </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-      </nav>
-      <!-- partial -->
+      <ul class="nav">
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?= ROOT_PATH ?>">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Inicio</span>
+            </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT_PATH?>users/edit/<?php echo $_SESSION['user_data']['id'] ?>">
+            <i class="mdi mdi-account-circle-outline menu-icon"></i>
+            <span class="menu-title">Editar Perfil</span>
+          </a>
+        </li>
+        <?php if($_SESSION['user_data']['rol'] != 0 ): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=ROOT_PATH?>posts/add/">
+            <i class="mdi mdi-newspaper menu-icon"></i>
+            <span class="menu-title">Añadir Post</span>
+          </a>
+        </li>
+          <?php if($_SESSION['user_data']['rol'] == 2): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=ROOT_PATH?>admin/addCategory/">
+              <i class="mdi mdi-tag menu-icon"></i>
+              <span class="menu-title">Añadir Categoria</span>
+            </a>
+          </li>
+          
+          <?php endif ?>
+        <?php endif ?>
+          </ul>
+      </nav>      <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -301,10 +271,6 @@
                                     <input type="text" class="form-control" id="exampleInputUsername1" name="correo" value="<?php echo $data['users']->correo?>"disabled >
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputUsername1">Contraseña</label>
-                                    <input type="password" class="form-control" id="exampleInputUsername1" name="password" value="<?php echo $data['users']->password?>"disabled >
-                                  </div>
-                                  <div class="form-group">
 
                                       <input accept="image/*" type='file' id="imgInp" name="foto" disabled/>
                                       <div class="row">
@@ -328,7 +294,6 @@
                                     Edit profile
                                     <i class="ti-file btn-icon-append"></i>                          
                                     </a>
-                                  <button class="btn btn-light">Cancel</button>
                                 </form>
                               </div>
                             </div>
@@ -345,7 +310,6 @@
                                 <div class="d-sm-flex justify-content-between align-items-start">
                                   <div>
                                     <h4 class="card-title card-title-dash">Comentarios</h4>
-                                   <p class="card-subtitle card-subtitle-dash">Hay X Categorias</p>
                                   </div>
                                 </div>
                                 <div class="table-responsive  mt-1">

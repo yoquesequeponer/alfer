@@ -10,7 +10,7 @@
                       <input type="text" class="form-control" id="exampleInputUsername1" name="contenido" value="<?php echo $data['coment']['contenido']?>" >
                     </div>
                     <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
-                    <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
+                    <a class="btn btn-light" href="<?= ROOT_PATH ?>posts/read/<?php echo $data['coment']['post_id']?>">Cancel</a>
                   </form>
                 </div>
               </div>

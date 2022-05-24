@@ -4,7 +4,7 @@ class UsersController extends Controller{
         $user= new User;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            if(empty($user->where('correo',$post['correo'])->get())){
+            if(!$user->where('correo',$post['correo'])->get()->isEmpty()){
                 header('Location:' . ROOT_PATH."users/register");
                 exit();
             }
@@ -15,7 +15,6 @@ class UsersController extends Controller{
             if($user->validate()){
                 if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
                     $error = 'There was no file uploaded';
-                Messages::setMsg($error,'error');
                     $this->view('add.html');
                     return;
                 }
@@ -62,6 +61,7 @@ class UsersController extends Controller{
                 "rol"=> $user->rol
                 
             );
+           // die($user);
             if($_SESSION['user_data']['rol']== 2){
                 header('location:'. ROOT_PATH."admin/admin");
             }else{

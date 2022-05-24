@@ -64,23 +64,27 @@ class ComentsController extends Controller {
     }
 
     public function edit($id){
+       
 
         if (isset($_SESSION['is_logged_in'])) {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {                  
-                $idPost = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
-                $coment = Coment::where('id', $idPost)->find($idPost);
+                $idcoment = array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0];
+                $coment = Coment::where('id', $idcoment)->find($idcoment);
+                $idPost = $coment->post_id;
 
                 if($coment->user_id == $_SESSION['user_data']['id']){//propietario
                     $contenido = $_POST['contenido'];
                     $coment->update(['contenido'=> $contenido]);
+                }else{
+                    exit();
                 }
 
                 if($_SESSION['user_data']['id']== 2){
-                    header('location:'. ROOT_PATH."/admin/admin/".$idPost);
+                    header('location:'. ROOT_PATH."admin/admin/".$idPost);
                 }elseif($_SESSION['user_data']['id']== 1){
-                    header('location:'. ROOT_PATH."/escritor/escritor/".$idPost);
+                    header('location:'. ROOT_PATH."escritor/escritor/".$idPost);
                 }else{
-                    header('location:'. ROOT_PATH."/posts/read/".$idPost);
+                    header('location:'. ROOT_PATH."users/user/".$idPost);
                 }
             }else{
                 $coments = new Coment;

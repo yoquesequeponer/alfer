@@ -14,7 +14,7 @@
                       <input type="text" class="form-control" id="exampleInputEmail1" name="nombre" required>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">apellido</label>
+                      <label for="exampleInputEmail1">Apellido</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" name="apellido"  required>
                     </div>
                     <div class="form-group">
@@ -26,7 +26,6 @@
                       <input type="email" class="form-control" id="exampleInputUsername1" name="correo"  required>
                     </div>
                     <div class="form-group">
-                    <label>Foto</label>
                     <div class="top-margin">
                             <label>Foto</label>
                             <input type="file" class="form-control file-upload-info" name="foto" required>

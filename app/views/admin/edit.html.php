@@ -26,7 +26,7 @@
                       <input type="email" class="form-control" id="exampleInputUsername1" name="correo" value="<?php echo $data['user']['correo']?>"disabled >
                     </div>
                     <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
-                    <button class="btn btn-light">Cancel</button>
+                    <a class="btn btn-light" href="<?= ROOT_PATH ?>admin/admin">Cancel</a>
                   </form>
                 </div>
               </div>

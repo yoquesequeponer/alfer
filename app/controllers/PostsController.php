@@ -34,7 +34,7 @@ class PostsController extends Controller{
         $posts = Post::where('id', $id)->find($id);
 
         $coments = Coment::with('user')->where('post_id', $id)->get();
-        $this->view('llread.html',['post'=>$posts, 'coments'=>$coments]); 
+        $this->view('read.html',['post'=>$posts, 'coments'=>$coments]); 
     
     }
 
