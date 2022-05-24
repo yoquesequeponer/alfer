@@ -7,27 +7,27 @@
                   <form class="forms-sample"enctype="multipart/form-data" action="<?php echo ROOT_PATH."users/edit/".$data['user']->id;?>" method="POST">
                   <div class="form-group">
                       <label for="exampleInputUsername1">Username</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" name="username" value="<?php echo $data['user']['userName']?>" >
+                      <input type="text" class="form-control" id="exampleInputUsername1" name="username" value="<?php echo $data['user']['userName']?>" reqired>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" name="nombre"value="<?php echo $data['user']['nombre']?>" >
+                      <input type="text" class="form-control" id="exampleInputEmail1" name="nombre"value="<?php echo $data['user']['nombre']?>" reqired>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">apellido</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" name="apellido"value="<?php echo $data['user']['apellido']?>" >
+                      <input type="text" class="form-control" id="exampleInputEmail1" name="apellido"value="<?php echo $data['user']['apellido']?>" reqired>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputUsername1">Password</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" name="password" value="<?php echo $data['user']['password']?>" >
+                      <input type="password" class="form-control" id="exampleInputUsername1" name="password" value="<?php echo $data['user']['password']?>" reqired>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputUsername1">Correo</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" name="correo" value="<?php echo $data['user']['correo']?>" >
+                      <input type="email" class="form-control" id="exampleInputUsername1" name="correo" value="<?php echo $data['user']['correo']?>" disabled>
                     </div>
                     <div class="form-group">
 
-                        <input accept="image/*" type='file' id="imgInp" name="foto"/>
+                        <input accept="image/*" type='file' id="imgInp" name="foto"reqired/>
                         <div class="row">
                           <div class="col-md-6 offset-md-3">
                             <img class="img-fluid" id="blah" src="data:img/jpg;base64,<?php echo base64_encode($data['user']->files->filedata); ?>" alt="your image" />
@@ -45,7 +45,7 @@
                       </script>
                     </div>                    
                     <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
-                    <button class="btn btn-light">Cancel</button>
+                    <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
                   </form>
                 </div>
               </div>

@@ -4,12 +4,15 @@ class UsersController extends Controller{
         $user= new User;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            if(empty($user->where('correo',$post['correo'])->get())){
+                header('Location:' . ROOT_PATH."users/register");
+                exit();
+            }
             $pwd = md5($post['password']);
             $post['password']=$pwd;
 
             $user->loadData($post);
             if($user->validate()){
-                $user->save();
                 if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
                     $error = 'There was no file uploaded';
                 Messages::setMsg($error,'error');
@@ -23,6 +26,8 @@ class UsersController extends Controller{
                 $file = new FileUser;
                 $file->loadData($uploaddata);
                     if($file->validate()){
+                                        $user->save();
+
                         $user->files()->save($file);
                     }else{
                         $error = 'There was an error while uploading the file';
@@ -31,8 +36,7 @@ class UsersController extends Controller{
                 header('Location:' . ROOT_PATH);
             }
         }else{
-            Messages::setMsg('Incorrect Register', 'error');
-            $this->view('register.html', ['user' => $user]);
+            $this->view('register.html');
 
         }
     }
@@ -58,11 +62,12 @@ class UsersController extends Controller{
                 "rol"=> $user->rol
                 
             );
-                header('Location:' . ROOT_PATH);
+            if($_SESSION['user_data']['rol']== 2){
+                header('location:'. ROOT_PATH."admin/admin");
             }else{
-                Messages::setMsg('Incorrect Login', 'error');
-
-                $this->view('login.html', ['user' => $user]);
+                header('location:'. ROOT_PATH."escritor/escritor");
+            }
+            header('location:'. ROOT_PATH."users/user");
 
             }
         }else{
@@ -79,6 +84,7 @@ class UsersController extends Controller{
     }
 
     public function edit($id){
+        if(isset($_SESSION['is_logged_in'])){
         if( ($_SESSION['user_data']['id'] != array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]) && ($_SESSION['user_data']['id'] != 2) ){// si no eres propietario ni admin
             //die("salho")
             header('Location:' . ROOT_PATH);
@@ -90,7 +96,8 @@ class UsersController extends Controller{
                 $username = $_POST['username'];
                 $nombre = $_POST['nombre'];
                 $apellido = $_POST['apellido'];
-                $correo =$_POST['correo'];
+                $correo = $user->correo;
+
                 if($user->password != md5($_POST['password'])){
                     $password = $_POST['password'];
                 }else{
@@ -99,15 +106,23 @@ class UsersController extends Controller{
                 $_SESSION['user_data'] = array(
                     "id" =>$idUsuario,
                     "userName"=> $username,
-                    "correo" =>$user->correo,
+                    "correo" => $correo,
                     "name" => $user->nombre,
                     "apellido" => $apellido,
                 );
-                $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
                 if(!is_uploaded_file($_FILES['foto']['tmp_name'])){
                     $error = 'There was no file uploaded';
-                Messages::setMsg($error,'error');
-                    $this->view('add.html');
+                                                    $user->update(['userName'=> $username, 'nombre'=> $nombre, 'apellido'=> $apellido, 'password'=> $password, 'correo'=> $correo]);
+
+                if($_SESSION['user_data']['rol']== 2){
+                    header('location:'. ROOT_PATH."admin/admin");
+                }elseif($_SESSION['user_data']['rol']== 1){
+                    header('location:'. ROOT_PATH."escritor/escritor");
+                }else{
+                    header('location:'. ROOT_PATH."users/user");
+                }
+
+
                     return;
                 }
                 $uploadfile = $_FILES['foto']['tmp_name'];
@@ -132,9 +147,14 @@ class UsersController extends Controller{
                 $user = $users->where('id', $id)->find($id);
                 $this->view('edit.html',['user'=>$user]);
             }
+        }else{
+            header('location:'. ROOT_PATH."users/login");
+        }
     }
 
     public function user(){
+                if(isset($_SESSION['is_logged_in'])){
+
         $user = new User;
         $users = $user->find($_SESSION['user_data']['id']);
 
@@ -142,6 +162,10 @@ class UsersController extends Controller{
         $coments=$coment->where('user_id',$_SESSION['user_data']['id'])->get();
         $this->view('user.html',['users'=>$users, 'coments'=>$coments]);
         
+    }else{
+                   header('location:'. ROOT_PATH."users/login");
+ 
+    }
     }
 }
 

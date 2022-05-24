@@ -8,7 +8,7 @@ class PostsController extends Controller{
             $page = "1";
         }
         //$posts=$post->all();
-        $perpage= 10;
+        $perpage= 4;
         $numRows=$post->count();
         $numPages=ceil($numRows/$perpage);
         $offset = ($page-1)*$perpage;
@@ -34,7 +34,7 @@ class PostsController extends Controller{
         $posts = Post::where('id', $id)->find($id);
 
         $coments = Coment::with('user')->where('post_id', $id)->get();
-        $this->view('read.html',['post'=>$posts, 'coments'=>$coments]); 
+        $this->view('llread.html',['post'=>$posts, 'coments'=>$coments]); 
     
     }
 
@@ -47,7 +47,7 @@ class PostsController extends Controller{
                     if($_SESSION['user_data']['rol']== 2){
                         header('location:'. ROOT_PATH."admin/admin");
                     }else{
-                        header('location:'. ROOT_PATH."escrito/escritor");
+                        header('location:'. ROOT_PATH."escritor/escritor");
                     }
                 }else{
                     header('location:'. ROOT_PATH);

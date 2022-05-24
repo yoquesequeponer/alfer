@@ -21,11 +21,12 @@ $form = new FormHelper;
                     <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."posts/add";?>" method="POST">
                         <div class="top-margin">
                             <label>Titulo</label>
-                            <?= $form->input('text', ['name'=>'titulo']) ?>
+                            <input type="text" class="form-control file-upload-info" name="titulo" required>
                         </div>
                         <div class="top-margin">
                             <label>Contenido</label>
-                            <?= $form->input('text', ['name'=>'contenido']) ?>
+                            <input type="text" class="form-control file-upload-info" name="contenido" required>
+
                         </div>
                         <div class="top-margin">
                             <label>Foto</label>
@@ -44,6 +45,7 @@ $form = new FormHelper;
                             <div class="col-lg-4 text-right">
                                 <!-- <button class="btn btn-action" type="submit">Register</button> -->
                                 <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
+                                 <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
                             </div>
                         </div>
                     </form>

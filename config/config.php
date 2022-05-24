@@ -18,11 +18,12 @@ define("ROOT_URL","");
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 // connect to database
-$conn = mysqli_connect('localhost', 'root', '', 'ALFER');
+$conn = mysqli_connect(DB_HOST, DB_USER, "", DB_NAME);
 
 // lets assume a user is logged in with id $user_id
 if(isset($_SESSION['is_logged_in'])){
 $user_id = $_SESSION['user_data']['id'];
+}
 
 if (!$conn) {
     die("Error connecting to database: " . mysqli_connect_error($conn));
@@ -136,4 +137,5 @@ if (!$conn) {
   // fetch all posts from database
   // return them as an associative array called $posts
   $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
+
+  

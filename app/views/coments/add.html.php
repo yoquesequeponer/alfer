@@ -17,7 +17,7 @@ $form = new FormHelper;
                 <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."coments/add/".array_slice(explode('/', rtrim($_GET['url'], '/')), -1)[0]?>" method="POST">
                         <div class="top-margin">
                             <label>Contenido <span class="text-danger"></span></label>
-                            <?= $form->input('text', ['name'=>'contenido']) ?>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="contenido" required>
                         </div>
                         <hr>
 
@@ -28,6 +28,7 @@ $form = new FormHelper;
                             <div class="col-lg-4 text-right">
                                 <!-- <button class="btn btn-action" type="submit">Sign in</button> -->
                                 <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
+                                 <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
                             </div>
                         </div>
                     </form>

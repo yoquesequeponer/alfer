@@ -1,56 +1,33 @@
 
-<?php ob_start(); 
-$form = new FormHelper;
-?>
-	<div class="container">
-<div class="row">
-    
-    <!-- Article main content -->
-    <article class="col-xs-12 maincontent">
-        <header class="page-header">
-            <h1 class="page-title">Sign in</h1>
-        </header>
-        
-        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3 class="thin text-center">Sign in to your account</h3>
-                    <p class="text-center text-muted">Lorem ipsum dolor sit amet, <a href="signup.html">Register</a> adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio. </p>
-                    <hr>
-                    
-                    <form enctype="multipart/form-data" action="<?php echo ROOT_PATH."users/login";?>" method="POST">
-                        <div class="top-margin">
-                            <label>Email <span class="text-danger">*</span></label>
-                            <?= $form->input('text', ['name'=>'correo']) ?>
-                        </div>
-                        <div class="top-margin">
-                            <label>Password <span class="text-danger">*</span></label>
-                            <?= $form->input('password', ['name'=>'password']) ?>
-                        </div>
+<?php ob_start(); $form = new FormHelper;?>
+<div class="d-flex justify-content-center">
+<div class="col-md-6 grid-margin stretch-card ">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Nueva categoria</h4>
+                  <form class="forms-sample"enctype="multipart/form-data" action="<?php echo ROOT_PATH."users/login/"?>" method="POST">
 
-                        <hr>
+                  <div class="form-group">
+                      <label for="exampleInputUsername1">Correo</label>
+                      <input type="email" class="form-control" id="exampleInputUsername1" name="correo"  required>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputUsername1" name="password" required >
+                    </div>
 
-                        <div class="row">
-                            <!-- <div class="col-lg-8">
-                                <b><a href="">Forgot password?</a></b>
-                            </div> -->
-                            <div class="col-lg-4 text-right">
-                                <!-- <button class="btn btn-action" type="submit">Sign in</button> -->
-                                <?= $form->input('submit', ['name'=>'submit','value'=>'submit']) ?>
-                            </div>
-                        </div>
-                    </form>
+                   <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
+                   <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
+                  </form>
                 </div>
+              </div>
+            </div>
             </div>
 
-        </div>
-        
-    </article>
-    <!-- /Article -->
+            <?php $content = ob_get_clean()?>
+<?php include 'app/views/adminlayout.html.php'?>
 
-</div>
-</div>	<!-- /container -->
-<?php $content = ob_get_clean()?>
-<?php include 'app/views/layout.html.php'?>
+
+
 
 

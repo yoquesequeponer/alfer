@@ -7,7 +7,8 @@ class AdminController extends UsersController{
         }
         $user = new User;
         $users = $user->all();
-        
+        $usuario = $user->find($_SESSION['user_data']['id']);
+
         $post = new Post;
         $posts = $post->all();
 
@@ -17,7 +18,7 @@ class AdminController extends UsersController{
         $categorias = Categorias::all();
         
 
-        $this->view('admin.html',['users'=>$users, 'posts'=> $posts, 'coments'=>$coments, 'categorias'=>$categorias]);
+        $this->view('admin.html',['users'=>$users, 'posts'=> $posts, 'coments'=>$coments, 'categorias'=>$categorias, 'usuario'=> $usuario]);
     }
 
 

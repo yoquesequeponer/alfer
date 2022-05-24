@@ -19,11 +19,11 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputUsername1">Password</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" name="password" required >
+                      <input type="password" class="form-control" id="exampleInputUsername1" name="password" required >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputUsername1">Correo</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" name="correo"  required>
+                      <input type="email" class="form-control" id="exampleInputUsername1" name="correo"  required>
                     </div>
                     <div class="form-group">
                     <label>Foto</label>
@@ -34,7 +34,7 @@
 
                   </div> 
                    <?= $form->input('submit', ['name'=>'submit','value'=>'submit', 'class'=>'btn btn-primary me-2']) ?>
-                    <button class="btn btn-light">Cancel</button>
+                   <a class="btn btn-light" href="<?= ROOT_PATH ?>">Cancel</a>
                   </form>
                 </div>
               </div>

@@ -11,11 +11,13 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="index.html">
-            <img src="<?php echo ROOT_PATH?>public/template/images/logo.svg" alt="logo" />
+          <a class="navbar-brand brand-logo" href="<?= ROOT_PATH ?>">
+                        <h1>ALFER</h1>
+
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="<?php echo ROOT_PATH?>public/template/images/logo-mini.svg" alt="logo" />
+          <a class="navbar-brand brand-logo-mini" href="<?= ROOT_PATH ?>">
+                        <h6>ALFER</h6>
+
           </a>
         </div>
       </div>
@@ -26,53 +28,51 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
+                <?php if($_SESSION['user_data']['rol']!=0) : ?>
           <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
+            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">Selecciona vista</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" >
-                <p class="mb-0 font-weight-medium float-left">Select category</p>
+              <a class="dropdown-item py-3" href="<?php echo ROOT_PATH ."posts/read/". $table->id?>">
+                <p class="mb-0 font-weight-medium float-left">Vistas disponibles</p>
               </a>
+              <?php if($_SESSION['user_data']['rol']==2) : ?>
+                            <a class="dropdown-item preview-item" href="<?= ROOT_PATH ?>admin/admin">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Vista Administrador</p>
+                </div>
+              </a>
+              <?php endif?>
+               <?php if($_SESSION['user_data']['rol']>=1) : ?>
+
+
+                            <a class="dropdown-item preview-item"  href="<?= ROOT_PATH ?>escritor/escritor">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Vista Escritor</p>
+                </div>
+              </a>
+              <?php endif?>
+
+
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+              <a class="dropdown-item preview-item" href="<?= ROOT_PATH ?>users/user">
                 <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
-                  <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
-                  <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">VUE Bundle</p>
-                  <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">React Bundle</p>
-                  <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Vista Usuario</p>
                 </div>
               </a>
             </div>
           </li>
+        <?php endif?>
+
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <img class="img-xs rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="data:img/jpg;base64,<?php echo base64_encode($data['users']->files->filedata); ?>" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                <p class="mb-1 mt-3 font-weight-semibold"><?php echo $_SESSION['user_data']['name']; ?></p>
+                <p class="fw-light text-muted mb-0"><?php echo $_SESSION['user_data']['correo']; ?></p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a class="dropdown-item" href="<?= ROOT_PATH ?>users/logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
@@ -256,38 +256,6 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item nav-category">pages</li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item nav-category">pages</li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-              </ul>
-            </div>
-          </li>
       </nav>
       <!-- partial -->
       <div class="main-panel">
@@ -320,7 +288,7 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" name="nombre"value="<?php echo $data['users']->name?>" disabled>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="nombre"value="<?php echo $data['users']->nombre?>" disabled>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputEmail1">apellido</label>
